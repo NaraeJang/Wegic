@@ -1,0 +1,74 @@
+// .form-alert {
+//   color: $cc-red-dark;
+//   letter-spacing: $letter-spacing;
+//   text-transform: capitalize;
+// }
+
+.form {
+  width: calc(100% - 2rem);
+  border-radius: $border-radius-desktop;
+  padding: 2rem 2.5rem;
+  margin: 3rem auto;
+
+  &-row {
+    margin-bottom: 1.5rem;
+  }
+
+  &-label {
+    display: block;
+    margin-bottom: 0.25rem;
+
+    text-align: left;
+    font-size: $small-text;
+    text-transform: capitalize;
+    letter-spacing: $letter-spacing;
+    line-height: 100%;
+    color: $cc-primary-800;
+  }
+
+  &-input {
+    width: 100%;
+
+    background: transparent;
+
+    padding: 0.125rem 0.3125rem 0.5rem;
+
+    border-color: transparent;
+    border-bottom: 1px solid $cc-primary-500;
+    outline: none;
+
+    font-size: $regular-text;
+    font-family: $ff-main;
+  }
+
+  &-textarea {
+    width: 100%;
+    background: transparent;
+    padding: 0.5rem;
+
+    border: 1px solid $cc-primary-500;
+    border-radius: 0.5rem;
+    outline: none;
+    height: 7rem;
+
+    &-input,
+    &-select,
+    &-btn {
+      height: 40px;
+    }
+
+    &::placeholder {
+      font-family: inherit;
+      color: lighten($cc-primary-400, 20%);
+      padding: 0.25rem;
+    }
+  }
+}
+
+.comment {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,54 @@
+.btn {
+  &,
+  &:visited,
+  &:link {
+    display: inline-block;
+    width: 73%;
+    margin-top: 2rem;
+    padding: 0.35rem;
+
+    color: $cc-primary-800;
+    font-family: $ff-main;
+    font-weight: $font-weight-bold;
+    font-size: $font-default-size;
+    line-height: 200%;
+    text-decoration: none;
+    text-transform: capitalize;
+
+    cursor: pointer;
+  }
+
+  &-primary {
+    background: transparent;
+    border: 1px solid $cc-primary-800;
+    border-radius: 1.5625rem;
+    transition: all 0.2s;
+
+    &:hover {
+      box-shadow: 0 0 1.875rem rgba($cc-primary-800, 0.25);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+      box-shadow: 0 0 0.625rem rgba($cc-primary-800, 0.25);
+    }
+  }
+}
+
+.btn-block {
+  width: 100%;
+}
+
+button:disabled {
+  cursor: wait;
+}
+
+.btn-delete {
+  background: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: $cc-primary-500;
+}

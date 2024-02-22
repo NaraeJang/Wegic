@@ -24,6 +24,12 @@ npm start
 
 ## Dependencies
 
+| Name             | Version | Name        | Version |
+| :--------------- | :------ | :---------- | :------ |
+| Vite.js          | 5.0.8   | Sass        | 1.71.1  |
+| React-router-dom | 6.21.3  | React-icons | 4.12.0  |
+| Dayjs            | 1.11.7  |
+
 ## Process
 
 ## How Can It Be Improved?
@@ -35,4 +41,5 @@ npm start
 Copyright (c) 2024 Narae Jang
 
 [The MIT License (MIT)](https://opensource.org/licenses/MIT)
+
 # Wegic

@@ -1,7 +1,8 @@
 @import 'abstracts/variables';
 
 @import 'base/global';
+@import 'base/hero';
 
-@import 'components/button';
-@import 'components/form';
-@import 'components/alert';
+@import 'sass-components/button';
+@import 'sass-components/form';
+@import 'sass-components/alert';

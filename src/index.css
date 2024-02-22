@@ -153,6 +153,10 @@ ul {
   animation: spinner 0.6s linear infinite;
 }
 
+.container {
+  padding: 0 1rem;
+}
+
 /* title */
 .title {
   text-align: center;
@@ -173,6 +177,40 @@ ul {
   height: 2rem;
   border-bottom: 1px solid #cbc5af;
   margin-bottom: 2rem;
+}
+
+.header {
+  width: 100%;
+  background: url(../images/heading-deco.png) no-repeat top/100%;
+  margin: 0;
+  padding-bottom: 3.125rem;
+  position: relative;
+}
+.header__language {
+  background: #f6f3ee;
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  top: 1rem;
+  right: 1rem;
+  border-radius: 100%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Martel", serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 0 0.75rem rgba(65, 66, 35, 0.4);
+  transition: 0.3s ease-in-out all;
+}
+.header__language:hover {
+  background-color: #414223;
+  color: #d7d4c8;
+}
+.header__language:active {
+  transform: translateY(2px);
 }
 
 .btn, .btn:visited, .btn:link {

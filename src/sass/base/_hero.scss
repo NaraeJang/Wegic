@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  background: url(../images/heading-deco.png) no-repeat top/100%;
+  margin: 0;
+  padding-bottom: 3.125rem;
+  position: relative;
+
+  &__language {
+    background: $background-color;
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 1rem;
+    right: 1rem;
+    border-radius: 100%;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: $ff-main;
+    text-transform: uppercase;
+    text-decoration: none;
+
+    cursor: pointer;
+    box-shadow: 0 0 0.75rem rgba($cc-primary-800, 0.4);
+    transition: $transition;
+
+    &:hover {
+      background-color: $cc-primary-800;
+      color: $cc-primary-100;
+    }
+
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+}

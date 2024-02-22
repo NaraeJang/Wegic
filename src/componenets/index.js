@@ -1,0 +1,12 @@
+export { default as Header } from './Header';
+export { default as Calendar } from './Calendar';
+export { default as Comment } from './Comment';
+export { default as Contact } from './Contact';
+export { default as LiveWedding } from './LiveWedding';
+export { default as OurStory } from './OurStory';
+export { default as Registry } from './Registry';
+export { default as Appointment } from './Appointment';
+export { default as Schedule } from './Schedule';
+export { default as WeddingParty } from './WeddingParty';
+export { default as Gallery } from './Gallery';
+export { default as PartyLocation } from './PartyLocation';

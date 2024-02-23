@@ -1,9 +1,12 @@
 .header {
   width: 100%;
-  background: url(../images/heading-deco.png) no-repeat top/100%;
-  margin: 0;
-  padding-bottom: 3.125rem;
+  background: url(./assets/images/hero/heading-deco.png) no-repeat top/100%;
   position: relative;
+
+  .container {
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
 
   &__language {
     background: $background-color;
@@ -22,6 +25,8 @@
     font-family: $ff-main;
     text-transform: uppercase;
     text-decoration: none;
+    color: $cc-primary-800;
+    font-weight: $font-weight-bold;
 
     cursor: pointer;
     box-shadow: 0 0 0.75rem rgba($cc-primary-800, 0.4);
@@ -34,6 +39,55 @@
 
     &:active {
       transform: translateY(2px);
+    }
+  }
+  &__text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  &__title {
+    font-weight: 800;
+    color: $cc-primary-800;
+    text-transform: uppercase;
+    line-height: 1.75rem;
+
+    span {
+      font-family: $ff-accent;
+      text-transform: lowercase;
+      font-weight: 400;
+      color: $cc-primary-500;
+    }
+  }
+
+  &__content {
+    max-width: min(90%, 22.5rem);
+  }
+}
+
+.banner {
+  &__content {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    line-height: 1.5rem;
+    padding-top: 3rem;
+
+    & > * {
+      color: $cc-primary-500;
+      line-height: 160%;
+    }
+
+    &--detail-date {
+      font-weight: $font-weight-bold;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    &--location {
+      font-weight: $font-weight-extra-bold;
+      text-transform: uppercase;
+      margin-top: 0.75rem;
     }
   }
 }

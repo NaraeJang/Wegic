@@ -17,7 +17,7 @@ html {
 body {
   box-sizing: border-box;
   background: $background-color;
-  max-width: 450px;
+  max-width: 500px;
 
   margin: 0 auto;
 
@@ -32,11 +32,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-@media screen and (min-width: $layout-breakpoint) {
-  body {
-    max-width: 800px;
-  }
-}
+// @media screen and (min-width: $layout-breakpoint) {
+//   body {
+//     max-width: 800px;
+//   }
+// }
 
 img,
 picture,
@@ -50,6 +50,9 @@ svg {
 p {
   margin: 0;
   overflow-wrap: break-word;
+
+  line-height: 1.75rem;
+  padding: 0 1.5rem;
 }
 
 h1,
@@ -69,19 +72,19 @@ h5 {
 }
 
 h1 {
-  font-size: clamp(1.4rem, 1.85vw, 1.85rem); /* Large heading */
+  font-size: 1.5rem; /* Large heading */
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3vw, 3rem); /* Medium heading */
+  font-size: 1.25rem; /* Medium heading */
 }
 
 h3 {
-  font-size: clamp(1.25rem, 2.5vw, 2.5rem); /* Small heading */
+  font-size: 1.125rem; /* Small heading */
 }
 
 h4 {
-  font-size: clamp(1rem, 2vw, 2rem); /* Extra small heading */
+  font-size: 1rem; /* Extra small heading */
 }
 
 h5 {
@@ -155,7 +158,16 @@ ul {
 }
 
 .container {
-  padding: 0 1rem;
+  padding: 3rem 0;
+}
+
+.section-divider {
+  text-align: center;
+
+  &__img {
+    width: 71px;
+    margin: 0 auto;
+  }
 }
 
 /* title */

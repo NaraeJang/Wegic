@@ -4,7 +4,6 @@
 /* rest of the colors */
 /* font family */
 /* test size */
-/*14px*/
 /* rest of the vars */
 /* box shadow*/
 /* ============= GLOBAL CSS =============== */
@@ -24,7 +23,7 @@ html {
 body {
   box-sizing: border-box;
   background: #f6f3ee;
-  max-width: 450px;
+  max-width: 500px;
   margin: 0 auto;
   font-family: "Martel", serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 400;
@@ -35,11 +34,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-@media screen and (min-width: 769px) {
-  body {
-    max-width: 800px;
-  }
-}
 img,
 picture,
 video,
@@ -52,6 +46,8 @@ svg {
 p {
   margin: 0;
   overflow-wrap: break-word;
+  line-height: 1.75rem;
+  padding: 0 1.5rem;
 }
 
 h1,
@@ -69,19 +65,19 @@ h5 {
 }
 
 h1 {
-  font-size: clamp(1.4rem, 1.85vw, 1.85rem); /* Large heading */
+  font-size: 1.5rem; /* Large heading */
 }
 
 h2 {
-  font-size: clamp(1.5rem, 3vw, 3rem); /* Medium heading */
+  font-size: 1.25rem; /* Medium heading */
 }
 
 h3 {
-  font-size: clamp(1.25rem, 2.5vw, 2.5rem); /* Small heading */
+  font-size: 1.125rem; /* Small heading */
 }
 
 h4 {
-  font-size: clamp(1rem, 2vw, 2rem); /* Extra small heading */
+  font-size: 1rem; /* Extra small heading */
 }
 
 h5 {
@@ -154,7 +150,15 @@ ul {
 }
 
 .container {
-  padding: 0 1rem;
+  padding: 3rem 0;
+}
+
+.section-divider {
+  text-align: center;
+}
+.section-divider__img {
+  width: 71px;
+  margin: 0 auto;
 }
 
 /* title */
@@ -181,10 +185,12 @@ ul {
 
 .header {
   width: 100%;
-  background: url(../images/heading-deco.png) no-repeat top/100%;
-  margin: 0;
-  padding-bottom: 3.125rem;
+  background: url(./assets/images/hero/heading-deco.png) no-repeat top/100%;
   position: relative;
+}
+.header .container {
+  padding-top: 5rem;
+  padding-bottom: 2rem;
 }
 .header__language {
   background: #f6f3ee;
@@ -201,6 +207,8 @@ ul {
   font-family: "Martel", serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-transform: uppercase;
   text-decoration: none;
+  color: #414223;
+  font-weight: 700;
   cursor: pointer;
   box-shadow: 0 0 0.75rem rgba(65, 66, 35, 0.4);
   transition: 0.3s ease-in-out all;
@@ -211,6 +219,48 @@ ul {
 }
 .header__language:active {
   transform: translateY(2px);
+}
+.header__text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+.header__title {
+  font-weight: 800;
+  color: #414223;
+  text-transform: uppercase;
+  line-height: 1.75rem;
+}
+.header__title span {
+  font-family: "Mr De Haviland", cursive, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-transform: lowercase;
+  font-weight: 400;
+  color: #7b7047;
+}
+.header__content {
+  max-width: min(90%, 22.5rem);
+}
+
+.banner__content {
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  line-height: 1.5rem;
+  padding-top: 3rem;
+}
+.banner__content > * {
+  color: #7b7047;
+  line-height: 160%;
+}
+.banner__content--detail-date {
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+}
+.banner__content--location {
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
 }
 
 .btn, .btn:visited, .btn:link {

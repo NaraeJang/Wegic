@@ -2,7 +2,8 @@ import heroImage from '../assets/images/hero/hero-cover.png';
 import { useWegicContext } from '../App';
 
 const Header = () => {
-  const { toggleFrench, isFrench } = useWegicContext();
+  const { toggleFrench, isFrench, dDay } = useWegicContext();
+  const { fullYearFR, theDayFR, fullYearEN, theDayEN } = dDay;
 
   return (
     <>
@@ -14,32 +15,41 @@ const Header = () => {
             onClick={toggleFrench}>
             <span>{isFrench ? 'EN' : 'FR'}</span>
           </button>
-          <div className="header__text pt-8">
-            <h1 className="heading__primary">
-              Peter
+          <div className="header__text-container">
+            <h1 className="header__title">
+              Iaroslav
               <br />
-              <span>and</span>
+              <span>{isFrench ? 'et' : 'and'}</span>
               <br />
-              Sarah
+              Sumin
             </h1>
-            <p className="content">
-              We invite you to share our joy to celebrate our marriage
+            <p className="header__content">
+              {isFrench
+                ? 'Nous vous invitons à partager notre joie de célébrer notre mariage'
+                : 'We invite you to share our joy to celebrate our marriage'}
             </p>
           </div>
         </div>
       </header>
 
-      <section>
-        <img className="banner__img" src={heroImage} alt="hero photo" />
+      <section id="banner">
+        <div className="container">
+          <img className="img" src={heroImage} alt="hero photo" />
 
-        <div className="container banner__content">
-          <h4 className="banner__content--month">
-            October, <span className="wedding-year"></span>
-          </h4>
-          <h4 className="banner__content--detail-date">
-            <span className="wedding-day"></span> | 14 | 05:00 pm
-          </h4>
-          <h3 className="banner__content--location">Le Club Forest & Stream</h3>
+          <div className="banner__content">
+            <h4 className="banner__content-month">
+              {isFrench ? fullYearFR : fullYearEN}
+            </h4>
+            <h4 className="banner__content-detail-date">
+              <span className="wedding-day">
+                {isFrench ? theDayFR : theDayEN}{' '}
+              </span>
+              | {isFrench ? '17:00' : '05:00 pm'}
+            </h4>
+            <h3 className="banner__content--location">
+              Le Club Forest & Stream
+            </h3>
+          </div>
         </div>
       </section>
     </>

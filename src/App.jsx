@@ -13,6 +13,9 @@ import {
   Comment,
   PartyLocation,
 } from './componenets';
+import dayjs from 'dayjs';
+import 'dayjs/locale/fr';
+import 'dayjs/locale/en';
 
 const WegicContext = createContext();
 
@@ -23,8 +26,30 @@ function App() {
     setIsFrench(!isFrench);
   };
 
+  // GET  D-DATE
+  const getTargetDate = () => {
+    const currentYear = dayjs().get('year');
+    const currentDate = dayjs();
+
+    let targetDate = dayjs(`${currentYear}-10-14`);
+
+    if (currentDate.isAfter(targetDate)) {
+      targetDate = targetDate.add(1, 'year');
+    }
+
+    return targetDate;
+  };
+
+  const dDay = {
+    fullYearFR: getTargetDate().locale('fr').format('MMMM DD, YYYY'),
+    theDayFR: getTargetDate().locale('fr').format('dddd'),
+    fullYearEN: getTargetDate().locale('en').format('MMMM DD, YYYY'),
+    theDayEN: getTargetDate().locale('en').format('dddd'),
+  };
+
   return (
-    <WegicContext.Provider value={{ toggleFrench, setIsFrench, isFrench }}>
+    <WegicContext.Provider
+      value={{ toggleFrench, setIsFrench, isFrench, dDay }}>
       <Header />
       <OurStory />
       <Gallery />

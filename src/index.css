@@ -46,7 +46,7 @@ svg {
 p {
   margin: 0;
   overflow-wrap: break-word;
-  line-height: 1.75rem;
+  line-height: 2rem;
   padding: 0 1.5rem;
 }
 
@@ -154,11 +154,18 @@ ul {
 }
 
 .section-divider {
-  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.section-divider > * {
+  text-transform: uppercase;
 }
 .section-divider__img {
   width: 71px;
   margin: 0 auto;
+}
+
+.pw-small {
+  padding: 0 5%;
 }
 
 /* title */

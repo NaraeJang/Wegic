@@ -21,6 +21,7 @@ const WegicContext = createContext();
 
 function App() {
   const [isFrench, setIsFrench] = useState(false);
+  const [isOurStoryModalOpen, setIsOurStoryModalOpen] = useState(false);
 
   const toggleFrench = () => {
     setIsFrench(!isFrench);
@@ -49,7 +50,14 @@ function App() {
 
   return (
     <WegicContext.Provider
-      value={{ toggleFrench, setIsFrench, isFrench, dDay }}>
+      value={{
+        toggleFrench,
+        setIsFrench,
+        isFrench,
+        dDay,
+        setIsOurStoryModalOpen,
+        isOurStoryModalOpen,
+      }}>
       <Header />
       <OurStory />
       <Gallery />

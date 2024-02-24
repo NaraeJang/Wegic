@@ -25,7 +25,7 @@
     width: 100%;
     height: auto;
     margin: auto;
-    padding: 1.5rem;
+    padding: 1.75rem 0 2.5rem;
     border-radius: 0.75rem;
 
     display: flex;
@@ -37,15 +37,18 @@
     box-shadow: $shadow-4;
 
     &-heading {
+      padding: 0 1rem 0 1.75rem;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: start;
+      align-items: center;
     }
 
     &-content {
+      padding: 0 1.75rem;
       p {
         padding: 0;
+        text-align: start;
       }
     }
   }

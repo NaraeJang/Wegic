@@ -6,9 +6,9 @@ const Title = ({ titleFr, titleEn }) => {
 
   return (
     <div>
-      <div class="section-divider">
+      <div className="section-divider">
         <img
-          class="section-divider__img"
+          className="section-divider__img"
           src={divider}
           alt="section divider image"
         />

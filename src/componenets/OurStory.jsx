@@ -2,7 +2,7 @@ import { Button, PopupOurStory, Title } from '../subCompoenets';
 import { useWegicContext } from '../App';
 
 const OurStory = () => {
-  const { isFrench } = useWegicContext();
+  const { isFrench, setIsOurStoryModalOpen } = useWegicContext();
 
   const onClick = () => {
     console.log('it is working');
@@ -32,7 +32,13 @@ const OurStory = () => {
             rest of their lives.
           </p>
         )}
-        <Button textFr="Lire la suite" textEn="Read More" onClick={onClick} />
+        <Button
+          textFr="Lire la suite"
+          textEn="Read More"
+          onClick={() => {
+            setIsOurStoryModalOpen(true);
+          }}
+        />
       </section>
     </>
   );

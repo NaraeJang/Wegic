@@ -1,7 +1,9 @@
+import { TitleNoDivider } from '../subCompoenets';
+
 const Gallery = () => {
   return (
     <section id="gallery" className="container">
-      Gallery
+      <TitleNoDivider titleEn="Gallery" titleFr="GALERIE" />
     </section>
   );
 };

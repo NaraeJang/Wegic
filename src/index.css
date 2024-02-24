@@ -171,7 +171,7 @@ ul {
 .section-divider {
   margin-bottom: 1.5rem;
 }
-.section-divider > * {
+.section-divider, .section-divider > * {
   text-transform: uppercase;
 }
 .section-divider__img {

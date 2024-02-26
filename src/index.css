@@ -446,6 +446,48 @@ ul {
   color: #e6cfc1 !important;
 }
 
+#schedule {
+  background-color: #efead9;
+}
+
+.schedule__heading {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.schedule__heading__img {
+  width: 2.9rem;
+}
+.schedule__heading h3 {
+  text-transform: uppercase;
+  margin: 0 1rem;
+  height: 1.125rem;
+}
+.schedule__content ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+.schedule__content ul li {
+  color: #414223;
+  font-size: 1rem;
+  text-transform: capitalize;
+}
+.schedule__content ul li:not(:last-child) {
+  padding-bottom: 0.5rem;
+}
+.schedule__content ul li span:first-child {
+  width: 35%;
+  display: inline-block;
+  text-align: right;
+  margin-right: 1rem;
+}
+.schedule__content ul li span:last-child {
+  width: 55%;
+  display: inline-block;
+  text-align: left;
+}
+
 .btn, .btn:visited, .btn:link {
   display: inline-block;
   width: 73%;

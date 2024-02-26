@@ -23,7 +23,7 @@ const GalleryImages = () => {
           '--swiper-navigation-color': '#fff',
           '--swiper-pagination-color': '#fff',
         }}
-        loop={true}
+        // loop={true}
         spaceBetween={10}
         navigation={true}
         thumbs={{

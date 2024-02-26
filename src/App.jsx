@@ -45,8 +45,10 @@ function App() {
 
   const dDay = {
     fullYearFR: getTargetDate().locale('fr').format('MMMM DD, YYYY'),
+    monthFR: getTargetDate().locale('fr').format('MMMM'),
     theDayFR: getTargetDate().locale('fr').format('dddd'),
     fullYearEN: getTargetDate().locale('en').format('MMMM DD, YYYY'),
+    monthEN: getTargetDate().locale('en').format('MMMM'),
     theDayEN: getTargetDate().locale('en').format('dddd'),
   };
 

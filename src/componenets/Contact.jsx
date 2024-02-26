@@ -7,22 +7,22 @@ const Contact = () => {
         titleEn="CONTACT GROOM & BRIDE"
         titleFr="CONTACTER LES MARIÉS"
       />
-      <div class="contact__content">
+      <div className="contact__content">
         <h4>Iaroslav</h4>
         <a href="tel:+11234567890">
-          <i class="fa-solid fa-phone"></i>
+          <i className="fa-solid fa-phone"></i>
         </a>
         <a href="mailto:peter@wegic.com">
-          <i class="fa-solid fa-envelope"></i>
+          <i className="fa-solid fa-envelope"></i>
         </a>
       </div>
-      <div class="contact__content">
+      <div className="contact__content">
         <h4>Sumin</h4>
         <a href="tel:+11234567890">
-          <i class="fa-solid fa-phone"></i>
+          <i className="fa-solid fa-phone"></i>
         </a>
         <a href="mailto:Sarah@wegic.com">
-          <i class="fa-solid fa-envelope"></i>
+          <i className="fa-solid fa-envelope"></i>
         </a>
       </div>
     </section>

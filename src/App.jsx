@@ -16,6 +16,8 @@ import {
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
 import 'dayjs/locale/en';
+import { register } from 'swiper/element/bundle';
+register();
 
 const WegicContext = createContext();
 

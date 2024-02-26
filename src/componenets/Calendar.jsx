@@ -7,18 +7,32 @@ import calendar from 'dayjs/plugin/calendar';
 dayjs.extend(calendar);
 
 const Calendar = () => {
-  const { dDay } = useWegicContext();
+  const { dDay, isFrench } = useWegicContext();
   const { monthFR, monthEN, year } = dDay;
-
-  const weddingDDay = document.querySelector('.d-day span');
 
   useEffect(() => {
     renderCalendar();
+    calculateDday();
   }, []);
 
+  const [targetDay, setTargetDay] = useState(null);
   const [calendarComponent, setCalendarComponent] = useState(null);
 
   // CALCULATE D-DAY
+  function calculateDday() {
+    // Get the current date and time
+    const currentDate = new Date().getTime();
+    const targetDate = new Date(`${year}-10-14`).getTime();
+
+    // Calculate the time remaining in milliseconds
+    const timeRemaining = targetDate - currentDate;
+
+    // Calculate the remaining days
+    const remainingDays = Math.ceil(timeRemaining / (1000 * 60 * 60 * 24));
+
+    // Update the HTML or user interface element with the remaining days
+    setTargetDay(remainingDays);
+  }
 
   // GET SUNDAY
   function getSundayDates(year, month) {
@@ -117,20 +131,28 @@ const Calendar = () => {
         <TitleNoDivider titleEn={monthEN} titleFr={monthFR} />
         <div className="calendar">
           <ul className="weeks">
-            <li className="sunday">s</li>
-            <li>m</li>
-            <li>t</li>
-            <li>w</li>
-            <li>t</li>
-            <li>f</li>
+            <li className="sunday">{isFrench ? 'd' : 's'}</li>
+            <li>{isFrench ? 'l' : 'm'}</li>
+            <li>{isFrench ? 'm' : 't'}</li>
+            <li>{isFrench ? 'm' : 'w'}</li>
+            <li>{isFrench ? 'j' : 't'}</li>
+            <li>{isFrench ? 'v' : 'f'}</li>
             <li>s</li>
           </ul>
           {calendarComponent}
         </div>
-        <h6> FIVE O'CLOCK IN THE EVENING</h6>
-        <h4 className="d-day">
-          The wedding is in <span>272</span> days
-        </h4>
+        <h6>
+          {isFrench ? 'À CINQUE HEURES DU SOIR' : `FIVE O'CLOCK IN THE EVENING`}
+        </h6>
+        {targetDay != null && isFrench ? (
+          <h4 className="d-day">
+            Le mariage est dans <span>{targetDay || 0}</span> jours
+          </h4>
+        ) : targetDay != null ? (
+          <h4 className="d-day">
+            The Wedding is in <span>{targetDay || 0}</span> days
+          </h4>
+        ) : null}
       </div>
     </section>
   );

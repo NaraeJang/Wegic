@@ -1,9 +1,6 @@
-import { useWegicContext } from '../App';
 import { TitleNoDivider } from '../subCompoenets';
 
 const Contact = () => {
-  const { isFrench } = useWegicContext();
-
   return (
     <section id="contact" className="container">
       <TitleNoDivider
@@ -11,7 +8,7 @@ const Contact = () => {
         titleFr="CONTACTER LES MARIÉS"
       />
       <div class="contact__content">
-        <h4>{isFrench ? 'contacter' : 'contact'} Iaroslav</h4>
+        <h4>Iaroslav</h4>
         <a href="tel:+11234567890">
           <i class="fa-solid fa-phone"></i>
         </a>
@@ -20,7 +17,7 @@ const Contact = () => {
         </a>
       </div>
       <div class="contact__content">
-        <h4>{isFrench ? 'contacter' : 'contact'} Sumin</h4>
+        <h4>Sumin</h4>
         <a href="tel:+11234567890">
           <i class="fa-solid fa-phone"></i>
         </a>

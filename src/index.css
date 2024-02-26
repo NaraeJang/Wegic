@@ -379,6 +379,74 @@ ul {
   color: #414223;
 }
 
+#calendar .container h6 {
+  text-transform: uppercase;
+  color: #414223;
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-bottom: 0.825rem;
+}
+#calendar .container .d-day {
+  padding: 0.25rem 1rem;
+  gap: 0.25rem;
+  color: #f6f3ee;
+  background-color: #978c63;
+  display: inline-block;
+  border-radius: 1.25rem;
+}
+#calendar ul.weeks {
+  font-weight: 700;
+}
+
+.calendar {
+  padding-bottom: 1.5rem;
+}
+.calendar ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar ul .sunday {
+  color: #6f4933 !important;
+}
+.calendar ul li {
+  position: relative;
+  width: 14.2857142857%;
+  z-index: 1;
+  margin-bottom: 1.25rem;
+}
+.calendar ul li::before {
+  content: "";
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  border-radius: 100%;
+}
+.calendar ul.weeks li {
+  text-transform: capitalize;
+  color: #414223;
+}
+.calendar ul.days li.active {
+  color: #f3f3f3;
+}
+.calendar ul.days li.active::before {
+  background: #978c63;
+}
+.calendar ul.days li.active.sunday {
+  color: #6f4933;
+}
+.calendar ul.days li.inactive {
+  color: #c3ba98;
+}
+.calendar ul.days li.inactive.sunday {
+  color: #c29479 !important;
+}
+
 .btn, .btn:visited, .btn:link {
   display: inline-block;
   width: 73%;

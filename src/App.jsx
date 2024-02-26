@@ -44,6 +44,7 @@ function App() {
   };
 
   const dDay = {
+    year: getTargetDate().format('YYYY'),
     fullYearFR: getTargetDate().locale('fr').format('MMMM DD, YYYY'),
     monthFR: getTargetDate().locale('fr').format('MMMM'),
     theDayFR: getTargetDate().locale('fr').format('dddd'),

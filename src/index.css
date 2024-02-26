@@ -339,7 +339,6 @@ ul {
   align-items: center;
   text-align: left;
   text-transform: uppercase;
-  font-size: 0.875rem;
   letter-spacing: 1px;
   line-height: 1.75;
 }
@@ -348,6 +347,8 @@ ul {
   font-size: 0.875rem;
   color: #7b7047;
   width: 5.5rem;
+  font-size: 0.875rem;
+  height: 0.875rem;
 }
 .contact__content a,
 .contact__content a:link,
@@ -379,6 +380,9 @@ ul {
   color: #414223;
 }
 
+#calendar .container {
+  padding-bottom: 6.25rem;
+}
 #calendar .container h6 {
   text-transform: uppercase;
   color: #414223;
@@ -488,6 +492,64 @@ ul {
   text-align: left;
 }
 
+.wedding-party__profiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  cursor: pointer;
+}
+.wedding-party__profiles--detail {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  margin: 0 1.5rem 1.5rem 1.5rem;
+  line-height: 1.125rem;
+}
+.wedding-party__profiles--detail img {
+  max-width: 10rem;
+  margin: 0 auto 1rem auto;
+}
+.wedding-party__profiles--detail h4 {
+  color: #414223;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+.wedding-party__profiles--detail h5 {
+  font-size: 0.75rem;
+  color: #7b7047;
+  text-transform: capitalize;
+}
+
+.wedding-party.container {
+  padding-top: 6.25rem;
+}
+
+.mySwiper3 {
+  height: 100%;
+}
+.mySwiper3 .swiper-slide {
+  background-color: transparent;
+}
+.mySwiper3 .swiper-pagination {
+  position: inherit;
+  margin-top: 0.5rem;
+}
+.mySwiper3 .swiper-pagination-bullet {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: #968b62;
+}
+.mySwiper3 .swiper-pagination-bullet-active {
+  background-color: #978c63;
+}
+
+@media screen and (max-width: 300px) {
+  .wedding-party__profiles {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 1.5rem;
+  }
+}
 .btn, .btn:visited, .btn:link {
   display: inline-block;
   width: 73%;

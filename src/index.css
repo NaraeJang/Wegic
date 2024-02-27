@@ -203,6 +203,11 @@ ul {
   margin: 0 auto;
 }
 
+/* Gift Registry */
+.gift-registry__content a:last-child {
+  margin-top: 1rem;
+}
+
 .comment-divider {
   width: 100%;
   height: 2rem;

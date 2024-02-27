@@ -216,6 +216,15 @@ ul {
   }
 }
 
+/* Gift Registry */
+.gift-registry {
+  &__content {
+    a:last-child {
+      margin-top: 1rem;
+    }
+  }
+}
+
 .comment-divider {
   width: 100%;
   height: 2rem;

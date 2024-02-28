@@ -12,6 +12,7 @@ import {
   LiveWedding,
   Comment,
   PartyLocation,
+  Footer,
 } from './componenets';
 import dayjs from 'dayjs';
 import 'dayjs/locale/fr';
@@ -75,6 +76,7 @@ function App() {
       <Appointment />
       <LiveWedding />
       <Comment />
+      <Footer />
     </WegicContext.Provider>
   );
 }

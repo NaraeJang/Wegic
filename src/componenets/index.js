@@ -10,3 +10,4 @@ export { default as Schedule } from './Schedule';
 export { default as WeddingParty } from './WeddingParty';
 export { default as Gallery } from './Gallery';
 export { default as PartyLocation } from './PartyLocation';
+export { default as Footer } from './Footer';

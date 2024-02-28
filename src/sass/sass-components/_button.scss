@@ -34,10 +34,10 @@
       box-shadow: 0 0 0.625rem rgba($cc-primary-800, 0.25);
     }
   }
-}
 
-.btn-block {
-  width: 100%;
+  &-block {
+    width: 100% !important;
+  }
 }
 
 button:disabled {

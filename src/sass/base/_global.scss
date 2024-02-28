@@ -270,3 +270,46 @@ ul {
     }
   }
 }
+
+/* footer */
+footer {
+  background-color: $background-secondary-color;
+  color: $cc-primary-800;
+  box-shadow: 3px 0 20px rgba($cc-primary-800, 0.05);
+
+  .container {
+    padding-bottom: 1.5rem;
+  }
+
+  .link {
+    margin-bottom: 2rem;
+    transition: all 0.2s;
+
+    button {
+      font-family: $ff-main;
+      color: $cc-primary-800;
+      font-weight: $font-weight-bold;
+      font-size: $regular-text;
+      text-transform: uppercase;
+
+      border: none;
+      background-color: transparent;
+
+      transition: $transition;
+
+      cursor: pointer;
+    }
+
+    button:hover {
+      color: lighten($color: $cc-primary-500, $amount: 20%);
+    }
+
+    button i {
+      padding-right: 1rem;
+    }
+  }
+
+  p {
+    font-size: $small-text;
+  }
+}

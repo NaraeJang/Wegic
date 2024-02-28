@@ -3,12 +3,11 @@ import { TitleNoDivider } from '../subCompoenets';
 
 const LiveWedding = () => {
   const { isFrench, dDay } = useWegicContext();
-  console.log(dDay);
   const { fullYearEN, fullYearFR, theDayEN, theDayFR } = dDay;
   return (
     <section id="live-wedding" className="container">
       <TitleNoDivider titleEn="LIVE WEDDING" titleFr="MARIAGE EN DIRECT" />
-      <div class="live-wedding__content">
+      <div className="live-wedding__content">
         <p>
           {isFrench
             ? 'Partagez la joie à distance en direct!'
@@ -21,7 +20,7 @@ const LiveWedding = () => {
 `}
         </h6>
         <a
-          class="btn btn-primary"
+          className="btn btn-primary"
           href="https://www.youtube.com/live-wedding"
           target="_blank">
           {isFrench

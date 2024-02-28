@@ -1,12 +1,57 @@
 import { createContext, useContext, useState } from 'react';
 import { ModalCommentDelete } from '../subCompoenets';
 import { useWegicContext } from '../App';
+import { TitleNoDivider } from '../subCompoenets';
+import { nanoid } from 'nanoid';
+import dayjs from 'dayjs';
 
 const CommentContext = createContext();
 
 const Comment = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const { isFrench } = useWegicContext();
+  const { isFrench, displayAlert } = useWegicContext();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const name = formData.get('name');
+    const message = formData.get('message');
+    const password = formData.get('password');
+    const id = nanoid();
+    const createdAt = dayjs().format('DD/MM/YYYY');
+
+    if (!name || !message || !password) {
+      if (!name) {
+        displayAlert(
+          'comment-input-name',
+          'Please fill out this field.',
+          'danger'
+        );
+      }
+      if (!message) {
+        displayAlert(
+          'comment-input-message',
+          'Please fill out this field.',
+          'danger'
+        );
+      }
+      if (!password) {
+        displayAlert(
+          'comment-input-password',
+          'Please fill out this field.',
+          'danger'
+        );
+      }
+      return;
+    }
+
+    if (name && message && password) {
+      // createListItem(id, name, message, password, createdAt);
+      displayAlert('comment-submit', 'Message added to the list', 'success');
+      return;
+    }
+  };
 
   return (
     <CommentContext.Provider
@@ -15,21 +60,24 @@ const Comment = () => {
 
       <section className="comment">
         <div className="container">
-          <h2>{isFrench ? 'RUBRIQUE DES COMMENTAIRES' : 'COMMENTS SECTION'}</h2>
+          <TitleNoDivider
+            titleEn="COMMENTS SECTION"
+            titleFr="RUBRIQUE DES COMMENTAIRES"
+          />
 
-          <form id="comment-form">
-            <div className="mb-small">
+          <form id="comment-form" onSubmit={handleSubmit}>
+            <div className="mb-small comment-input-name">
               <label htmlFor="name">
                 {isFrench ? 'Nom Complet' : 'Name'}
                 <span className="obligatory">*</span>
               </label>
-              <input type="text" id="name" name="name" />
+              <input type="text" id="name" name="name" defaultValue="narae" />
               <div className="alert">
                 <p></p>
               </div>
             </div>
 
-            <div className="mb-small">
+            <div className="mb-small comment-input-message">
               <label htmlFor="message">
                 {isFrench ? 'Commentaire' : 'Message'}
                 <span className="obligatory">*</span>
@@ -44,29 +92,28 @@ const Comment = () => {
                     ? `Je vous souhaite beaucoup d'amour et de bonheur.`
                     : 'Wishing you lots of love and happiness.'
                 }></textarea>
-              <div className="alert">
-                <p></p>
-              </div>
             </div>
 
-            <div className="mb-small">
+            <div className="comment-input-password">
               <label htmlFor="password">
                 {isFrench ? 'Mot de Passe' : 'Password'}
                 <span className="obligatory">*</span>
               </label>
-              <input type="password" name="password" id="password" />
-              <div className="alert">
-                <p></p>
-              </div>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                defaultValue="1234"
+              />
             </div>
-
-            <button
-              className="btn btn-primary btn-block"
-              type="submit"
-              id="comment-submit-btn">
-              {isFrench ? 'Laisser un Message' : 'Leave A Message'}
-            </button>
-            <p className="alert"></p>
+            <div className="comment-submit">
+              <button
+                className="btn btn-primary btn-block"
+                type="submit"
+                id="comment-submit-btn">
+                {isFrench ? 'Laisser un Message' : 'Leave A Message'}
+              </button>
+            </div>
           </form>
         </div>
 

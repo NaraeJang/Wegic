@@ -21,7 +21,7 @@ const Footer = () => {
     <footer>
       <div className="container">
         <div className="link">
-          <button type="button" onClick={linkCopy}>
+          <button type="button" className="link-copy" onClick={linkCopy}>
             <i className="fa-solid fa-link"></i>
             <span>{isFrench ? 'Copier le lien' : 'Copy the link'}</span>
           </button>

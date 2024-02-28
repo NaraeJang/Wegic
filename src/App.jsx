@@ -54,6 +54,28 @@ function App() {
     theDayEN: getTargetDate().locale('en').format('dddd'),
   };
 
+  // Display Alert
+  function displayAlert(location, text, action) {
+    let currAlert = document.querySelector(`.${location}`);
+
+    // prevent to display same alert at the same time.
+    if (currAlert.lastElementChild.classList.contains('alert')) {
+      const alertDiv = currAlert.querySelector('.alert');
+      alertDiv.remove();
+    }
+
+    // create alert div.
+    let div = document.createElement('div');
+    div.classList.add(`alert`, `show`, `alert-${action}`);
+    div.textContent = text;
+    currAlert.append(div);
+
+    // remove alert
+    setTimeout(function () {
+      div.remove();
+    }, 3000);
+  }
+
   return (
     <WegicContext.Provider
       value={{
@@ -63,6 +85,7 @@ function App() {
         dDay,
         setIsOurStoryModalOpen,
         isOurStoryModalOpen,
+        displayAlert,
       }}>
       <Header />
       <OurStory />

@@ -15,18 +15,18 @@ const CommentItem = ({ comment }) => {
     <>
       <article className="comment__container" data-id={id} data-pass={password}>
         <div className="comment__header">
-          <div className="comment__header__main text-align-left">
+          <div className="comment__header__main">
             <p className="comment__header__main--date">{createdAt}</p>
             <h6 className="comment__header__main--name">{name}</h6>
           </div>
           <button
             type="button"
-            className="delete-btn comment-delete-btn"
+            className="icon close-icon"
             onClick={openDeleteModal}>
             <i className="fa-solid fa-x"></i>
           </button>
         </div>
-        <div className="comment__body text-align-left">
+        <div className="comment__body">
           <p>{message}</p>
         </div>
         <div className="comment-divider"></div>

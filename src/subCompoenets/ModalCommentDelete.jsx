@@ -3,8 +3,47 @@ import { useCommentContext } from '../componenets/Comment';
 import ModalTitle from './ModalTitle';
 
 const ModalCommentDelete = () => {
-  const { isFrench } = useWegicContext();
-  const { isDeleteModalOpen, setIsDeleteModalOpen } = useCommentContext();
+  const { isFrench, displayAlert } = useWegicContext();
+  const { isDeleteModalOpen, setIsDeleteModalOpen, getLocalStorage } =
+    useCommentContext();
+
+  const removeFromLocalStorage = (id) => {
+    let items = getLocalStorage.filter((item) => {
+      if (item.id !== id) item;
+    });
+
+    localStorage.setItem('list', JSON.stringify(items));
+  };
+
+  const deleteItem = () => {
+    const password = commentConfirmPassword.value;
+    const targetContainerId = commentPopupDeleteBtn.getAttribute('data-target');
+    const targetContainer = document.querySelector(
+      `[data-id="${targetContainerId}"]`
+    );
+
+    if (!password) {
+      displayAlert(
+        'comment-delete-popup__content',
+        'Please fill out this field.',
+        'danger'
+      );
+    } else if (password !== targetContainer.getAttribute('data-pass')) {
+      displayAlert(
+        'comment-delete-popup__content',
+        'Incorrect password.',
+        'danger'
+      );
+      setTimeout(() => {
+        setBackToDefault();
+      }, 1400);
+    } else {
+      targetContainer.remove();
+      commentPopup.classList.remove('show-popup');
+      setBackToDefault();
+      removeFromLocalStorage(targetContainerId);
+    }
+  };
 
   return (
     <div

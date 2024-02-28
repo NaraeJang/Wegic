@@ -5,3 +5,4 @@ export { default as PopupOurStory } from './PopupOurStory';
 export { default as ModalTitle } from './ModalTitle';
 export { default as GalleryImages } from './GalleryImages';
 export { default as ModalCommentDelete } from './ModalCommentDelete';
+export { default as CommentListItem } from './CommentListItem';

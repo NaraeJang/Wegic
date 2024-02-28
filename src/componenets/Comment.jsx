@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react';
-import { ModalCommentDelete } from '../subCompoenets';
+import { createContext, useContext, useEffect, useState } from 'react';
+import { ModalCommentDelete, CommentListItem } from '../subCompoenets';
 import { useWegicContext } from '../App';
 import { TitleNoDivider } from '../subCompoenets';
 import { nanoid } from 'nanoid';
@@ -9,8 +9,47 @@ const CommentContext = createContext();
 
 const Comment = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const { isFrench, displayAlert } = useWegicContext();
 
+  const { isFrench, displayAlert } = useWegicContext();
+  const [getLocalStorage, setGetLocalStorage] = useState(
+    localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
+  );
+
+  const addToLocalStorage = (id, name, message, password, createdAt) => {
+    const comment = {
+      id,
+      name,
+      message,
+      password,
+      createdAt,
+    };
+
+    const newCommentStorage = [comment, ...getLocalStorage];
+    setGetLocalStorage(newCommentStorage);
+
+    localStorage.setItem('list', JSON.stringify(newCommentStorage));
+  };
+
+  // CREATE COMMENT LIST
+  const createListItem = (id, name, message, password, createdAt) => {
+    // Check if the item already exists
+    const existingItem = getLocalStorage.find((item) => item.id === id);
+
+    if (!existingItem) {
+      // Create a new item
+      const comment = {
+        id,
+        name,
+        message,
+        password,
+        createdAt,
+      };
+
+      setGetLocalStorage((prev) => [comment, ...prev]);
+    }
+  };
+
+  // HANDLE SUBMIT
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -47,15 +86,26 @@ const Comment = () => {
     }
 
     if (name && message && password) {
-      // createListItem(id, name, message, password, createdAt);
+      createListItem(id, name, message, password, createdAt);
+      addToLocalStorage(id, name, message, password, createdAt);
       displayAlert('comment-submit', 'Message added to the list', 'success');
+      e.target.reset();
       return;
     }
   };
 
+  useEffect(() => {
+    if (getLocalStorage) {
+      getLocalStorage.map((comment) => {
+        const { id, name, message, password, createdAt } = comment;
+        createListItem(id, name, message, password, createdAt);
+      });
+    }
+  }, []);
+
   return (
     <CommentContext.Provider
-      value={{ isDeleteModalOpen, setIsDeleteModalOpen }}>
+      value={{ isDeleteModalOpen, setIsDeleteModalOpen, getLocalStorage }}>
       <ModalCommentDelete />
 
       <section className="comment">
@@ -71,7 +121,7 @@ const Comment = () => {
                 {isFrench ? 'Nom Complet' : 'Name'}
                 <span className="obligatory">*</span>
               </label>
-              <input type="text" id="name" name="name" defaultValue="narae" />
+              <input type="text" id="name" name="name" />
               <div className="alert">
                 <p></p>
               </div>
@@ -99,12 +149,7 @@ const Comment = () => {
                 {isFrench ? 'Mot de Passe' : 'Password'}
                 <span className="obligatory">*</span>
               </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                defaultValue="1234"
-              />
+              <input type="password" name="password" id="password" />
             </div>
             <div className="comment-submit">
               <button
@@ -118,7 +163,14 @@ const Comment = () => {
         </div>
 
         <div className="container">
-          <div className="comment__list"></div>
+          <div className="comment__list">
+            {getLocalStorage.map((comment, index) => {
+              console.log(comment);
+              return (
+                <CommentListItem key={`${index}commentList`} {...comment} />
+              );
+            })}
+          </div>
         </div>
       </section>
     </CommentContext.Provider>

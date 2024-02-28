@@ -25,6 +25,12 @@ const WegicContext = createContext();
 function App() {
   const [isFrench, setIsFrench] = useState(false);
   const [isOurStoryModalOpen, setIsOurStoryModalOpen] = useState(false);
+  const [isAlarming, setIsAlarming] = useState(true);
+  const [alarmText, setAlarmText] = useState({
+    textFR: '',
+    textEN: '',
+    alertStatus: '',
+  });
 
   const toggleFrench = () => {
     setIsFrench(!isFrench);
@@ -55,24 +61,14 @@ function App() {
   };
 
   // Display Alert
-  function displayAlert(location, text, action) {
-    let currAlert = document.querySelector(`.${location}`);
-
-    // prevent to display same alert at the same time.
-    if (currAlert.lastElementChild.classList.contains('alert')) {
-      const alertDiv = currAlert.querySelector('.alert');
-      alertDiv.remove();
-    }
-
-    // create alert div.
-    let div = document.createElement('div');
-    div.classList.add(`alert`, `show`, `alert-${action}`);
-    div.textContent = text;
-    currAlert.append(div);
+  function displayAlert(textFR, textEN, alertStatus) {
+    setIsAlarming(true);
+    setAlarmText({ textFR, textEN, alertStatus });
 
     // remove alert
     setTimeout(function () {
-      div.remove();
+      setIsAlarming(false);
+      setAlarmText({ textFR: '', textEN: '', alertStatus: '' });
     }, 3000);
   }
 
@@ -86,6 +82,10 @@ function App() {
         setIsOurStoryModalOpen,
         isOurStoryModalOpen,
         displayAlert,
+        isAlarming,
+        setIsAlarming,
+        alarmText,
+        setAlarmText,
       }}>
       <Header />
       <OurStory />

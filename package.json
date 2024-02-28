@@ -15,7 +15,8 @@
     "nanoid": "^5.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "swiper": "^10.0.0"
+    "swiper": "^10.0.0",
+    "xtypejs": "^0.7.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

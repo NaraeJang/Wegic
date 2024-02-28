@@ -1,7 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { ModalCommentDelete, CommentListItem } from '../subCompoenets';
+import {
+  ModalCommentDelete,
+  CommentListItem,
+  TitleNoDivider,
+  Alert,
+} from '../subCompoenets';
 import { useWegicContext } from '../App';
-import { TitleNoDivider } from '../subCompoenets';
 import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
 
@@ -9,11 +13,16 @@ const CommentContext = createContext();
 
 const Comment = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
-  const { isFrench, displayAlert } = useWegicContext();
+  const [deleteItem, setDeleteItem] = useState({});
+  const { isFrench, displayAlert, isAlarming, setIsAlarming } =
+    useWegicContext();
   const [getLocalStorage, setGetLocalStorage] = useState(
     localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
   );
+  const commentSubmitBtn = document.getElementById('comment-submit-btn');
+  const commentName = document.getElementById('name');
+  const commentMessage = document.getElementById('message');
+  const commentPassword = document.getElementById('password');
 
   const addToLocalStorage = (id, name, message, password, createdAt) => {
     const comment = {
@@ -61,34 +70,23 @@ const Comment = () => {
     const createdAt = dayjs().format('DD/MM/YYYY');
 
     if (!name || !message || !password) {
-      if (!name) {
-        displayAlert(
-          'comment-input-name',
-          'Please fill out this field.',
-          'danger'
-        );
-      }
-      if (!message) {
-        displayAlert(
-          'comment-input-message',
-          'Please fill out this field.',
-          'danger'
-        );
-      }
-      if (!password) {
-        displayAlert(
-          'comment-input-password',
-          'Please fill out this field.',
-          'danger'
-        );
-      }
+      displayAlert(
+        'Veuillez fournir des valeurs appropriées.',
+        'Please provide proper values.',
+        'danger'
+      );
+
       return;
     }
 
     if (name && message && password) {
       createListItem(id, name, message, password, createdAt);
       addToLocalStorage(id, name, message, password, createdAt);
-      displayAlert('comment-submit', 'Message added to the list', 'success');
+      displayAlert(
+        'Message ajouté à la liste.',
+        'Message added to the list',
+        'success'
+      );
       e.target.reset();
       return;
     }
@@ -101,13 +99,18 @@ const Comment = () => {
         createListItem(id, name, message, password, createdAt);
       });
     }
-  }, []);
+  }, [getLocalStorage]);
 
   return (
     <CommentContext.Provider
-      value={{ isDeleteModalOpen, setIsDeleteModalOpen, getLocalStorage }}>
+      value={{
+        isDeleteModalOpen,
+        setIsDeleteModalOpen,
+        getLocalStorage,
+        deleteItem,
+        setDeleteItem,
+      }}>
       <ModalCommentDelete />
-
       <section className="comment">
         <div className="container">
           <TitleNoDivider
@@ -122,9 +125,6 @@ const Comment = () => {
                 <span className="obligatory">*</span>
               </label>
               <input type="text" id="name" name="name" />
-              <div className="alert">
-                <p></p>
-              </div>
             </div>
 
             <div className="mb-small comment-input-message">
@@ -151,23 +151,25 @@ const Comment = () => {
               </label>
               <input type="password" name="password" id="password" />
             </div>
-            <div className="comment-submit">
-              <button
-                className="btn btn-primary btn-block"
-                type="submit"
-                id="comment-submit-btn">
-                {isFrench ? 'Laisser un Message' : 'Leave A Message'}
-              </button>
-            </div>
+
+            <button
+              className="btn btn-primary btn-block"
+              type="submit"
+              id="comment-submit-btn">
+              {isFrench ? 'Laisser un Message' : 'Leave A Message'}
+            </button>
+            {isAlarming && <Alert />}
           </form>
         </div>
 
         <div className="container">
           <div className="comment__list">
             {getLocalStorage.map((comment, index) => {
-              console.log(comment);
               return (
-                <CommentListItem key={`${index}commentList`} {...comment} />
+                <CommentListItem
+                  key={`${index}commentList`}
+                  comment={comment}
+                />
               );
             })}
           </div>

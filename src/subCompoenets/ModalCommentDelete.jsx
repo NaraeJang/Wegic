@@ -84,7 +84,9 @@ const ModalCommentDelete = () => {
         <form
           className={`comment-delete-popup__content`}
           onSubmit={handleSubmit}>
-          <label htmlFor="confirm-passward">Mot de Passe</label>
+          <label htmlFor="confirm-passward">
+            {isFrench ? 'Mot de Passe' : 'password'}
+          </label>
           <input
             type="password"
             id={`confirm-password`}
@@ -95,7 +97,7 @@ const ModalCommentDelete = () => {
             id={`comment-popup-delete-btn`}
             className="btn btn-primary btn-block"
             type="submit">
-            Oui, supprimer
+            {isFrench ? 'Oui, supprimer' : 'Yes, Delete it.'}
           </button>
           {isAlarming && (
             <Alert alarmText={alarmText} isAlarming={isAlarming} />

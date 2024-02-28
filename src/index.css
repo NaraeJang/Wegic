@@ -208,6 +208,22 @@ ul {
   margin-top: 1rem;
 }
 
+/* Party Location */
+.location iframe {
+  width: 100%;
+}
+.location__content {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  text-align: left;
+}
+.location__content > * > h4 {
+  text-transform: uppercase;
+}
+.location__content p {
+  padding: 0 0 1rem 0;
+}
+
 .comment-divider {
   width: 100%;
   height: 2rem;

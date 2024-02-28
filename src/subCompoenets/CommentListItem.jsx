@@ -1,16 +1,16 @@
+import { useEffect } from 'react';
 import { useCommentContext } from '../componenets/Comment';
 
 const CommentItem = ({ comment }) => {
-  const { setIsDeleteModalOpen, deleteItem, setDeleteItem } =
+  const { setIsDeleteModalOpen, deleteItem, setDeleteItem, getLocalStorage } =
     useCommentContext();
   const { id, name, message, password, createdAt } = comment;
 
   const openDeleteModal = () => {
     setIsDeleteModalOpen(true);
     setDeleteItem({ id, password });
-
-    console.log(deleteItem);
   };
+
   return (
     <>
       <article className="comment__container" data-id={id} data-pass={password}>

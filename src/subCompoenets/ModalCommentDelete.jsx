@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useWegicContext } from '../App';
 import { useCommentContext } from '../componenets/Comment';
 import Alert from './Alert';
@@ -12,11 +12,10 @@ const ModalCommentDelete = () => {
     isDeleteModalOpen,
     setIsDeleteModalOpen,
     getLocalStorage,
+    setGetLocalStorage,
     deleteItem,
     setDeleteItem,
   } = useCommentContext();
-  const { id, password } = deleteItem;
-  console.log('before function works', deleteItem);
 
   const [alarmText, setAlarmText] = useState({
     textFR: '',
@@ -39,7 +38,6 @@ const ModalCommentDelete = () => {
 
   const removeFromLocalStorage = (id) => {
     let items = getLocalStorage.filter((item) => item.id !== id);
-
     setGetLocalStorage(items);
     localStorage.setItem('list', JSON.stringify(items));
   };
@@ -58,16 +56,16 @@ const ModalCommentDelete = () => {
       );
     }
 
-    if (confirmedPassword !== password) {
+    if (confirmedPassword !== deleteItem?.password) {
       return commentDeleteAlarm(
         `Mot de passe incorrect.`,
         'Incorrect password.',
         'danger'
       );
     }
-    removeFromLocalStorage(id);
-    setDeleteItem();
-    console.log('from the delete function result', deleteItem);
+    removeFromLocalStorage(deleteItem.id);
+    setIsDeleteModalOpen(false);
+    e.target.reset();
   };
 
   return (

@@ -120,6 +120,7 @@ const Comment = () => {
         isDeleteModalOpen,
         setIsDeleteModalOpen,
         getLocalStorage,
+        setGetLocalStorage,
         deleteItem,
         setDeleteItem,
       }}>

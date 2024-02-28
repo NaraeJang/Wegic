@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { useWegicContext } from '../App';
 import { useCommentContext } from '../componenets/Comment';
+import Alert from './Alert';
 import ModalTitle from './ModalTitle';
+
 import xtype from 'xtypejs';
 
 const ModalCommentDelete = () => {
-  const { isFrench, displayAlert } = useWegicContext();
+  const { isFrench } = useWegicContext();
   const {
     isDeleteModalOpen,
     setIsDeleteModalOpen,
@@ -13,11 +16,31 @@ const ModalCommentDelete = () => {
     setDeleteItem,
   } = useCommentContext();
   const { id, password } = deleteItem;
+  console.log('before function works', deleteItem);
+
+  const [alarmText, setAlarmText] = useState({
+    textFR: '',
+    textEN: '',
+    alertStatus: '',
+  });
+  const [isAlarming, setIsAlarming] = useState(true);
+
+  // Display Alert
+  function commentDeleteAlarm(textFR, textEN, alertStatus) {
+    setIsAlarming(true);
+    setAlarmText({ textFR, textEN, alertStatus });
+
+    // remove alert
+    setTimeout(function () {
+      setIsAlarming(false);
+      setAlarmText({ textFR: '', textEN: '', alertStatus: '' });
+    }, 3000);
+  }
 
   const removeFromLocalStorage = (id) => {
     let items = getLocalStorage.filter((item) => item.id !== id);
-    console.log(getLocalStorage);
 
+    setGetLocalStorage(items);
     localStorage.setItem('list', JSON.stringify(items));
   };
 
@@ -28,36 +51,23 @@ const ModalCommentDelete = () => {
     const confirmedPassword = formData.get('confirm-password');
 
     if (!confirmedPassword) {
-      return displayAlert(
-        `comment-delete-popup__content`,
+      return commentDeleteAlarm(
+        `Veuillez remplir ce champ`,
         'Please fill out this field.',
         'danger'
       );
     }
 
     if (confirmedPassword !== password) {
-      return displayAlert(`delete${id}`, 'Incorrect password.', 'danger');
+      return commentDeleteAlarm(
+        `Mot de passe incorrect.`,
+        'Incorrect password.',
+        'danger'
+      );
     }
-    // const targetContainerId = document
-    //   .getElementById(`comment-popup-delete-btn${id}`)
-    //   .getAttribute('data-target');
-    // const targetContainer = document.querySelector(
-    //   `[data-id="${targetContainerId}"]`
-    // );
-
-    // if (!confirmedPassword) {
-    //   displayAlert(`delete${id}`, 'Please fill out this field.', 'danger');
-
-    //   return;
-    // }
-
-    // if (confirmedPassword !== targetContainer.getAttribute('data-pass')) {
-    //   return displayAlert(`delete${id}`, 'Incorrect password.', 'danger');
-    // }
-    // targetContainer.remove();
-    // setIsDeleteModalOpen(false);
-    // e.target.reset();
-    // removeFromLocalStorage(targetContainerId);
+    removeFromLocalStorage(id);
+    setDeleteItem();
+    console.log('from the delete function result', deleteItem);
   };
 
   return (
@@ -89,6 +99,9 @@ const ModalCommentDelete = () => {
             type="submit">
             Oui, supprimer
           </button>
+          {isAlarming && (
+            <Alert alarmText={alarmText} isAlarming={isAlarming} />
+          )}
         </form>
       </div>
     </div>

@@ -25,12 +25,6 @@ const WegicContext = createContext();
 function App() {
   const [isFrench, setIsFrench] = useState(false);
   const [isOurStoryModalOpen, setIsOurStoryModalOpen] = useState(false);
-  const [isAlarming, setIsAlarming] = useState(true);
-  const [alarmText, setAlarmText] = useState({
-    textFR: '',
-    textEN: '',
-    alertStatus: '',
-  });
 
   const toggleFrench = () => {
     setIsFrench(!isFrench);
@@ -60,17 +54,17 @@ function App() {
     theDayEN: getTargetDate().locale('en').format('dddd'),
   };
 
-  // Display Alert
-  function displayAlert(textFR, textEN, alertStatus) {
-    setIsAlarming(true);
-    setAlarmText({ textFR, textEN, alertStatus });
+  // // Display Alert
+  // function displayAlert(textFR, textEN, alertStatus) {
+  //   setIsAlarming(true);
+  //   setAlarmText({ textFR, textEN, alertStatus });
 
-    // remove alert
-    setTimeout(function () {
-      setIsAlarming(false);
-      setAlarmText({ textFR: '', textEN: '', alertStatus: '' });
-    }, 3000);
-  }
+  //   // remove alert
+  //   setTimeout(function () {
+  //     setIsAlarming(false);
+  //     setAlarmText({ textFR: '', textEN: '', alertStatus: '' });
+  //   }, 3000);
+  // }
 
   return (
     <WegicContext.Provider
@@ -81,11 +75,6 @@ function App() {
         dDay,
         setIsOurStoryModalOpen,
         isOurStoryModalOpen,
-        displayAlert,
-        isAlarming,
-        setIsAlarming,
-        alarmText,
-        setAlarmText,
       }}>
       <Header />
       <OurStory />

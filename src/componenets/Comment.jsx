@@ -12,17 +12,30 @@ import dayjs from 'dayjs';
 const CommentContext = createContext();
 
 const Comment = () => {
+  const [alarmText, setAlarmText] = useState({
+    textFR: '',
+    textEN: '',
+    alertStatus: '',
+  });
+  const [isAlarming, setIsAlarming] = useState(true);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState({});
-  const { isFrench, displayAlert, isAlarming, setIsAlarming } =
-    useWegicContext();
+  const { isFrench } = useWegicContext();
   const [getLocalStorage, setGetLocalStorage] = useState(
     localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
   );
-  const commentSubmitBtn = document.getElementById('comment-submit-btn');
-  const commentName = document.getElementById('name');
-  const commentMessage = document.getElementById('message');
-  const commentPassword = document.getElementById('password');
+
+  // Display Alert
+  function commentAlarm(textFR, textEN, alertStatus) {
+    setIsAlarming(true);
+    setAlarmText({ textFR, textEN, alertStatus });
+
+    // remove alert
+    setTimeout(function () {
+      setIsAlarming(false);
+      setAlarmText({ textFR: '', textEN: '', alertStatus: '' });
+    }, 3000);
+  }
 
   const addToLocalStorage = (id, name, message, password, createdAt) => {
     const comment = {
@@ -70,7 +83,7 @@ const Comment = () => {
     const createdAt = dayjs().format('DD/MM/YYYY');
 
     if (!name || !message || !password) {
-      displayAlert(
+      commentAlarm(
         'Veuillez fournir des valeurs appropriées.',
         'Please provide proper values.',
         'danger'
@@ -82,7 +95,7 @@ const Comment = () => {
     if (name && message && password) {
       createListItem(id, name, message, password, createdAt);
       addToLocalStorage(id, name, message, password, createdAt);
-      displayAlert(
+      commentAlarm(
         'Message ajouté à la liste.',
         'Message added to the list',
         'success'
@@ -158,7 +171,9 @@ const Comment = () => {
               id="comment-submit-btn">
               {isFrench ? 'Laisser un Message' : 'Leave A Message'}
             </button>
-            {isAlarming && <Alert />}
+            {isAlarming && (
+              <Alert alarmText={alarmText} isAlarming={isAlarming} />
+            )}
           </form>
         </div>
 

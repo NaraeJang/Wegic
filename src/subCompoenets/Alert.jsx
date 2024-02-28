@@ -1,7 +1,7 @@
 import { useWegicContext } from '../App';
 
-const Alert = () => {
-  const { isFrench, isAlarming, alarmText } = useWegicContext();
+const Alert = ({ alarmText, isAlarming }) => {
+  const { isFrench } = useWegicContext();
   const { textFR, textEN, alertStatus } = alarmText;
 
   return (

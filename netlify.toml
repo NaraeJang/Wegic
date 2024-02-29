@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/"
+  to = "https://script.google.com/macros/s/AKfycbyZTccbf4A-7k3COx9xyUy-44Vc8K6iMek5L3BWQ9xkJFz_MgmX7iywnkW-L5nnd3YZUw/exec"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"

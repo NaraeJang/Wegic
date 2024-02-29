@@ -32,7 +32,7 @@ const RsvpFirstModal = () => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-
+    // console.log(Object.fromEntries(formData));
     const fullName = formData.get('rsvpFullName');
     const guestNumber = formData.get('rsvpGuestNumber');
     const guestName = formData.get('rsvpGuestName');
@@ -46,8 +46,36 @@ const RsvpFirstModal = () => {
       );
     }
 
-    setIsFirstModalOpen(false);
-    setIsSecondModalOpen(true);
+    const data = {
+      FullName: fullName || '',
+      GuestNumber: guestNumber || '',
+      GuestName: guestName || '',
+      MealPreference: meal || 'Standard',
+    };
+
+    console.log(data);
+
+    fetch(
+      'https://script.google.com/macros/s/AKfycbyZTccbf4A-7k3COx9xyUy-44Vc8K6iMek5L3BWQ9xkJFz_MgmX7iywnkW-L5nnd3YZUw/exec',
+      {
+        method: 'Post',
+        body: data,
+      }
+    )
+      .then((res) => res.text())
+      .then((data) => {
+        console.log(data);
+        setIsFirstModalOpen(false);
+        setIsSecondModalOpen(true);
+      })
+      .catch((err) => {
+        commentDeleteAlarm(
+          `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
+          'Something went wrong, please try it later.',
+          'danger'
+        );
+        return console.log(err);
+      });
   };
 
   return (

@@ -26,6 +26,9 @@ function App() {
   const [isFrench, setIsFrench] = useState(false);
   const [isOurStoryModalOpen, setIsOurStoryModalOpen] = useState(false);
 
+  const fetchApi =
+    'https://script.google.com/macros/s/AKfycbzIH2rpMX0RVUwLdycqQQd3_Fd9xMG_hlppWfbxTNkaOX84Xx3v9xr6pX1VPqkom7s3yQ/exec';
+
   const toggleFrench = () => {
     setIsFrench(!isFrench);
   };
@@ -75,6 +78,7 @@ function App() {
         dDay,
         setIsOurStoryModalOpen,
         isOurStoryModalOpen,
+        fetchApi,
       }}>
       <Header />
       <OurStory />

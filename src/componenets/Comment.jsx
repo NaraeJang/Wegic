@@ -20,7 +20,7 @@ const Comment = () => {
   const [isAlarming, setIsAlarming] = useState(true);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState({});
-  const { isFrench } = useWegicContext();
+  const { isFrench, fetchApi } = useWegicContext();
   const [getLocalStorage, setGetLocalStorage] = useState(
     localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
   );
@@ -76,11 +76,16 @@ const Comment = () => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const name = formData.get('name');
-    const message = formData.get('message');
-    const password = formData.get('password');
+
+    const name = formData.get('CommentName');
+    const message = formData.get('CommentMessage');
+    const password = formData.get('CommentPassword');
     const id = nanoid();
     const createdAt = dayjs().format('DD/MM/YYYY');
+
+    formData.append('CreatedAt', createdAt);
+
+    console.log(Object.fromEntries(formData));
 
     if (!name || !message || !password) {
       commentAlarm(
@@ -95,11 +100,29 @@ const Comment = () => {
     if (name && message && password) {
       createListItem(id, name, message, password, createdAt);
       addToLocalStorage(id, name, message, password, createdAt);
-      commentAlarm(
-        'Message ajouté à la liste.',
-        'Message added to the list',
-        'success'
-      );
+
+      fetch(fetchApi, {
+        method: 'POST',
+        body: formData,
+      })
+        .then((res) => res.text())
+        .then((data) => {
+          console.log(data);
+          commentAlarm(
+            'Message ajouté à la liste.',
+            'Message added to the list',
+            'success'
+          );
+        })
+        .catch((err) => {
+          commentAlarm(
+            `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
+            'Something went wrong, please try it later.',
+            'danger'
+          );
+          return console.log(err);
+        });
+
       e.target.reset();
       return;
     }
@@ -138,7 +161,7 @@ const Comment = () => {
                 {isFrench ? 'Nom Complet' : 'Name'}
                 <span className="obligatory">*</span>
               </label>
-              <input type="text" id="name" name="name" />
+              <input type="text" id="name" name="CommentName" />
             </div>
 
             <div className="mb-small comment-input-message">
@@ -147,7 +170,7 @@ const Comment = () => {
                 <span className="obligatory">*</span>
               </label>
               <textarea
-                name="message"
+                name="CommentMessage"
                 id="message"
                 cols="30"
                 rows="10"
@@ -163,7 +186,7 @@ const Comment = () => {
                 {isFrench ? 'Mot de Passe' : 'Password'}
                 <span className="obligatory">*</span>
               </label>
-              <input type="password" name="password" id="password" />
+              <input type="password" name="CommentPassword" id="password" />
             </div>
 
             <button

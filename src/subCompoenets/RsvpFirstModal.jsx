@@ -9,7 +9,7 @@ import axios from 'axios';
 const rsvpApiURL = import.meta.env.VITE_RSVP_API_URL;
 
 const RsvpFirstModal = () => {
-  const { isFrench } = useWegicContext();
+  const { isFrench, fetchApi } = useWegicContext();
   const { setIsFirstModalOpen, setIsSecondModalOpen } = useRsvpContext();
 
   const [alarmText, setAlarmText] = useState({
@@ -31,15 +31,15 @@ const RsvpFirstModal = () => {
     }, 3000);
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     // console.log(Object.fromEntries(formData));
-    const fullName = formData.get('rsvpFullName');
-    const guestNumber = formData.get('rsvpGuestNumber');
-    const guestName = formData.get('rsvpGuestName');
-    const meal = formData.get('rsvpMeal');
+    const fullName = formData.get('FullName');
+    const guestNumber = formData.get('GuestNumber');
+    const guestName = formData.get('GuestName');
+    const meal = formData.get('MealPreference');
 
     if (!fullName || !meal) {
       return commentDeleteAlarm(
@@ -49,39 +49,14 @@ const RsvpFirstModal = () => {
       );
     }
 
-    const data = {
-      FullName: fullName || '',
-      GuestNumber: guestNumber || '',
-      GuestName: guestName || '',
-      MealPreference: meal || 'Standard',
-    };
-
-    console.log(data);
-
-    try {
-      await axios.post(rsvpApiURL, data);
-      setIsFirstModalOpen(false);
-      setIsSecondModalOpen(true);
-      return;
-    } catch (error) {
-      commentDeleteAlarm(
-        `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
-        'Something went wrong, please try it later.',
-        'danger'
-      );
-      return console.log(error);
-    }
-
-    fetch(
-      'https://script.google.com/macros/s/AKfycbyZTccbf4A-7k3COx9xyUy-44Vc8K6iMek5L3BWQ9xkJFz_MgmX7iywnkW-L5nnd3YZUw/exec',
-      {
-        method: 'Post',
-        body: data,
-      }
-    )
+    fetch(fetchApi, {
+      method: 'POST',
+      body: formData,
+    })
       .then((res) => res.text())
       .then((data) => {
         console.log(data);
+        commentDeleteAlarm(`Envoi des données..`, 'Sending data...', 'success');
         setIsFirstModalOpen(false);
         setIsSecondModalOpen(true);
       })
@@ -109,7 +84,7 @@ const RsvpFirstModal = () => {
               <label htmlFor="rsvpFullName">
                 <h4>{isFrench ? 'Nom Complet*' : 'Full Name*'}</h4>
               </label>
-              <input type="text" id="rsvpFullName" name="rsvpFullName" />
+              <input type="text" id="rsvpFullName" name="FullName" />
             </div>
             <div className="rsvp-form__guests--number">
               <label htmlFor="rsvpGuestNumber">
@@ -118,7 +93,7 @@ const RsvpFirstModal = () => {
               <input
                 type="number"
                 id="rsvpGuestNumber"
-                name="rsvpGuestNumber"
+                name="GuestNumber"
                 required="required"
                 defaultValue="0"
               />
@@ -131,7 +106,7 @@ const RsvpFirstModal = () => {
                     : 'Name of Additional Guests'}
                 </h4>
               </label>
-              <input type="text" id="rsvpGuestName" name="rsvpGuestName" />
+              <input type="text" id="rsvpGuestName" name="GuestName" />
             </div>
             <div className="rsvp-form__meal">
               <h4>
@@ -139,19 +114,19 @@ const RsvpFirstModal = () => {
               </h4>
               <div className="rsvp-form__meal--group">
                 <RsvpRadioInput
-                  category="rsvpMeal"
+                  category="MealPreference"
                   labelTextEn="Standardised"
                   labelTextFr="Standardisé"
                   name="standard"
                 />
                 <RsvpRadioInput
-                  category="rsvpMeal"
+                  category="MealPreference"
                   labelTextEn="halal"
                   labelTextFr="halal"
                   name="halal"
                 />
                 <RsvpRadioInput
-                  category="rsvpMeal"
+                  category="MealPreference"
                   labelTextEn="Vegan"
                   labelTextFr="végétalien"
                   name="vegan"

@@ -4,6 +4,7 @@ import { useRsvpContext } from '../componenets/Appointment';
 import ModalTitle from './ModalTitle';
 import RsvpRadioInput from './RsvpRadioInput';
 import Alert from './Alert';
+import axios from 'axios';
 
 const RsvpFirstModal = () => {
   const { isFrench } = useWegicContext();
@@ -28,7 +29,7 @@ const RsvpFirstModal = () => {
     }, 3000);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -54,6 +55,30 @@ const RsvpFirstModal = () => {
     };
 
     console.log(data);
+
+    try {
+      await axios.post(
+        'https://script.google.com/macros/s/AKfycbyZTccbf4A-7k3COx9xyUy-44Vc8K6iMek5L3BWQ9xkJFz_MgmX7iywnkW-L5nnd3YZUw/exec',
+        data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          },
+        }
+      );
+      setIsFirstModalOpen(false);
+      setIsSecondModalOpen(true);
+      return;
+    } catch (error) {
+      commentDeleteAlarm(
+        `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
+        'Something went wrong, please try it later.',
+        'danger'
+      );
+      return console.log(error);
+    }
 
     fetch(
       'https://script.google.com/macros/s/AKfycbyZTccbf4A-7k3COx9xyUy-44Vc8K6iMek5L3BWQ9xkJFz_MgmX7iywnkW-L5nnd3YZUw/exec',

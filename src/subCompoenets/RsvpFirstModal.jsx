@@ -58,15 +58,8 @@ const RsvpFirstModal = () => {
 
     try {
       await axios.post(
-        'https://script.google.com/macros/s/AKfycbyZTccbf4A-7k3COx9xyUy-44Vc8K6iMek5L3BWQ9xkJFz_MgmX7iywnkW-L5nnd3YZUw/exec',
-        data,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          },
-        }
+        'https://script.google.com/macros/s/AKfycbwN2Xrg41m8fRSKJsB4CAVNSH4uN_CJ_iRWiat8jVGqfFw1VRnMJwvTvRefvjfv9egt8w/exec',
+        data
       );
       setIsFirstModalOpen(false);
       setIsSecondModalOpen(true);

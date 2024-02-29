@@ -857,6 +857,10 @@ footer p {
   height: 0.75rem;
   margin-right: 1rem;
 }
+.rsvp__popup__page__content .rsvp-form .alert p {
+  padding: 0.5rem 0;
+  line-height: 140%;
+}
 .rsvp__popup__page__content p {
   padding: 0 0 2rem 0;
 }

@@ -7,8 +7,8 @@ import { Button, RsvpFirstModal, RsvpSecondModal } from '../subCompoenets';
 const RsvpContext = createContext();
 
 const Appointment = () => {
-  const [isFirstModalOpen, setIsFirstModalOpen] = useState(true);
-  const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
+  const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
+  const [isSecondModalOpen, setIsSecondModalOpen] = useState(true);
 
   return (
     <RsvpContext.Provider

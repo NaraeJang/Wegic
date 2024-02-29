@@ -90,6 +90,7 @@
 
     &__content {
       padding: 1.75rem;
+
       .rsvp-form {
         display: flex;
         flex-direction: column;
@@ -133,6 +134,11 @@
           width: 0.75rem;
           height: 0.75rem;
           margin-right: 1rem;
+        }
+
+        & .alert p {
+          padding: 0.5rem 0;
+          line-height: 140%;
         }
       }
 

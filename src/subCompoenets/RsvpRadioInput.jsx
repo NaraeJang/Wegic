@@ -5,7 +5,7 @@ const RsvpRadioInput = ({ category, labelTextFr, labelTextEn, name }) => {
 
   return (
     <label className="radio-input-label" htmlFor={name}>
-      <input type="radio" name={category} id={name} />
+      <input type="radio" name={category} id={name} defaultValue={name} />
       <span>{isFrench ? labelTextFr : labelTextEn}</span>
     </label>
   );

@@ -1,11 +1,54 @@
+import { useState } from 'react';
 import { useWegicContext } from '../App';
 import { useRsvpContext } from '../componenets/Appointment';
 import ModalTitle from './ModalTitle';
 import RsvpRadioInput from './RsvpRadioInput';
+import Alert from './Alert';
 
 const RsvpFirstModal = () => {
   const { isFrench } = useWegicContext();
-  const { setIsFirstModalOpen } = useRsvpContext();
+  const { setIsFirstModalOpen, setIsSecondModalOpen } = useRsvpContext();
+
+  const [alarmText, setAlarmText] = useState({
+    textFR: '',
+    textEN: '',
+    alertStatus: '',
+  });
+  const [isAlarming, setIsAlarming] = useState(false);
+
+  // Display Alert
+  function commentDeleteAlarm(textFR, textEN, alertStatus) {
+    setIsAlarming(true);
+    setAlarmText({ textFR, textEN, alertStatus });
+
+    // remove alert
+    setTimeout(function () {
+      setIsAlarming(false);
+      setAlarmText({ textFR: '', textEN: '', alertStatus: '' });
+    }, 3000);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
+    const fullName = formData.get('rsvpFullName');
+    const guestNumber = formData.get('rsvpGuestNumber');
+    const guestName = formData.get('rsvpGuestName');
+    const meal = formData.get('rsvpMeal');
+
+    if (!fullName || !meal) {
+      return commentDeleteAlarm(
+        'Nom ou préférence manquants.',
+        'Full Name or Meal Preference is missing.',
+        'danger'
+      );
+    }
+
+    setIsFirstModalOpen(false);
+    setIsSecondModalOpen(true);
+  };
 
   return (
     <div className="rsvp__popup">
@@ -16,18 +59,24 @@ const RsvpFirstModal = () => {
           onClick={() => setIsFirstModalOpen(false)}
         />
         <div className="rsvp__popup__page__content">
-          <form className="rsvp-form">
+          <form className="rsvp-form" onSubmit={handleSubmit}>
             <div className="rsvp-form__name">
               <label htmlFor="rsvpFullName">
-                <h4>{isFrench ? 'Nom Complet' : 'Full Name'}</h4>
+                <h4>{isFrench ? 'Nom Complet*' : 'Full Name*'}</h4>
               </label>
-              <input type="text" id="rsvpFullName" required="required" />
+              <input type="text" id="rsvpFullName" name="rsvpFullName" />
             </div>
             <div className="rsvp-form__guests--number">
               <label htmlFor="rsvpGuestNumber">
                 <h4>{isFrench ? `Nombre d’Invités` : 'Number of Guests'}</h4>
               </label>
-              <input type="number" id="rsvpGuestNumber" required="required" />
+              <input
+                type="number"
+                id="rsvpGuestNumber"
+                name="rsvpGuestNumber"
+                required="required"
+                defaultValue="0"
+              />
             </div>
             <div className="rsvp-form__guests--name">
               <label htmlFor="rsvpGuestName">
@@ -37,10 +86,12 @@ const RsvpFirstModal = () => {
                     : 'Name of Additional Guests'}
                 </h4>
               </label>
-              <input type="text" id="rsvpGuestName" />
+              <input type="text" id="rsvpGuestName" name="rsvpGuestName" />
             </div>
             <div className="rsvp-form__meal">
-              <h4>{isFrench ? `Préférence alimentaire` : `Meal Preference`}</h4>
+              <h4>
+                {isFrench ? `Préférence alimentaire*` : `Meal Preference*`}
+              </h4>
               <div className="rsvp-form__meal--group">
                 <RsvpRadioInput
                   category="rsvpMeal"
@@ -68,9 +119,9 @@ const RsvpFirstModal = () => {
               type="submit">
               {isFrench ? 'soumettre' : 'submit'}
             </button>
-            <div className="alert">
-              <p></p>
-            </div>
+            {isAlarming && (
+              <Alert alarmText={alarmText} isAlarming={isAlarming} />
+            )}
           </form>
         </div>
       </div>

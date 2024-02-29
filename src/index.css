@@ -741,6 +741,141 @@ footer p {
   font-size: 0.75rem;
 }
 
+.rsvp__popup--second {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(65, 66, 35, 0.4);
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  transition: 0.3s ease-in-out all;
+}
+.rsvp__popup--second .rsvp--second__heading {
+  height: 5%;
+}
+.rsvp__popup--second .rsvp--second__content {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  padding: 4rem 0 5rem;
+}
+.rsvp__popup--second .rsvp--second__content button {
+  margin-top: 0;
+}
+
+.rsvp {
+  background-color: #efead9;
+}
+.rsvp__heading {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+.rsvp__heading h2 {
+  line-height: 100%;
+  margin: auto 1rem;
+}
+.rsvp__heading__img {
+  width: 5.75rem;
+  margin: auto;
+}
+
+.rsvp__popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(65, 66, 35, 0.4);
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: 0.3s ease-in-out all;
+  z-index: 1000;
+}
+.rsvp__popup__page {
+  border-radius: 0.75rem;
+  margin: auto;
+  height: auto;
+  max-width: 390px;
+  background-color: #f6f3ee;
+}
+.rsvp__popup__page .modal__page-heading {
+  padding: 1.75rem 1.75rem 0 1.75rem;
+}
+.rsvp__popup__page .modal__page-heading .close-icon {
+  transform: translateX(8px);
+}
+.rsvp__popup__page__content {
+  padding: 1.75rem;
+}
+.rsvp__popup__page__content .rsvp-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.rsvp__popup__page__content .rsvp-form__name, .rsvp__popup__page__content .rsvp-form__guests--number, .rsvp__popup__page__content .rsvp-form__guests--name {
+  margin-bottom: 2.5rem;
+}
+.rsvp__popup__page__content .rsvp-form__name input, .rsvp__popup__page__content .rsvp-form__guests--number input, .rsvp__popup__page__content .rsvp-form__guests--name input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #7b7047;
+  background: transparent;
+  outline: none;
+  padding-left: 0.25rem;
+  padding-bottom: 0.25rem;
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+.rsvp__popup__page__content .rsvp-form h4 {
+  display: inline-block;
+  width: 100%;
+  color: #564e32;
+  margin-bottom: 1rem;
+}
+.rsvp__popup__page__content .rsvp-form__meal--group {
+  display: grid;
+  gap: 0.25rem;
+  grid-template-columns: 1fr 1fr;
+}
+.rsvp__popup__page__content .rsvp-form input[type=radio] {
+  mix-blend-mode: multiply;
+  accent-color: #414223;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 1rem;
+}
+.rsvp__popup__page__content p {
+  padding: 0 0 2rem 0;
+}
+
+.radio-input-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  text-transform: capitalize;
+}
+
+@media screen and (max-width: 380px) {
+  /* Adjust the max-width for smaller screens */
+  .rsvp__popup__page {
+    max-width: 360px; /* Adjust this value to your preference */
+  }
+}
 .btn, .btn:visited, .btn:link {
   display: inline-block;
   width: 73%;

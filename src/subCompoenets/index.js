@@ -7,3 +7,6 @@ export { default as GalleryImages } from './GalleryImages';
 export { default as ModalCommentDelete } from './ModalCommentDelete';
 export { default as CommentListItem } from './CommentListItem';
 export { default as Alert } from './Alert';
+export { default as RsvpFirstModal } from './RsvpFirstModal';
+export { default as RsvpSecondModal } from './RsvpSecondModal';
+export { default as RsvpRadioInput } from './RsvpRadioInput';

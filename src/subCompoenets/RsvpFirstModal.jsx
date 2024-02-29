@@ -6,6 +6,8 @@ import RsvpRadioInput from './RsvpRadioInput';
 import Alert from './Alert';
 import axios from 'axios';
 
+const rsvpApiURL = import.meta.env.VITE_RSVP_API_URL;
+
 const RsvpFirstModal = () => {
   const { isFrench } = useWegicContext();
   const { setIsFirstModalOpen, setIsSecondModalOpen } = useRsvpContext();
@@ -57,10 +59,7 @@ const RsvpFirstModal = () => {
     console.log(data);
 
     try {
-      await axios.post(
-        'https://script.google.com/macros/s/AKfycbwN2Xrg41m8fRSKJsB4CAVNSH4uN_CJ_iRWiat8jVGqfFw1VRnMJwvTvRefvjfv9egt8w/exec',
-        data
-      );
+      await axios.post(rsvpApiURL, data);
       setIsFirstModalOpen(false);
       setIsSecondModalOpen(true);
       return;

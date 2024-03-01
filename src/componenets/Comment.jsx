@@ -26,8 +26,9 @@ const Comment = () => {
     localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
   );
   let dataFromGoogle;
+  let outputArrayFromGoogleData = [];
 
-  // Display Alert
+  // DISPLAY ALARM
   function commentAlarm(textFR, textEN, alertStatus) {
     setIsAlarming(true);
     setAlarmText({ textFR, textEN, alertStatus });
@@ -39,42 +40,36 @@ const Comment = () => {
     }, 3000);
   }
 
-  const addToLocalStorage = (id, name, message, password, createdAt) => {
-    const comment = {
-      id,
-      name,
-      message,
-      password,
-      createdAt,
+  const outputArrayFromGoogle = (innerArray) => {
+    const newItem = {
+      id: innerArray[0],
+      name: innerArray[1],
+      message: innerArray[2].toString(),
+      password: innerArray[3].toString(),
+      createdAt: innerArray[4],
     };
 
-    const newCommentStorage = [comment, ...getLocalStorage];
-    setGetLocalStorage(newCommentStorage);
-
-    localStorage.setItem('list', JSON.stringify(newCommentStorage));
+    return newItem;
   };
 
-  // Fetch data from Google sheet.
-  const bringDataFromGoogleSheet = async () => {
-    setIsLoading(true);
+  // ADD LOCAL STORAGE
+  const addToLocalStorage = (commentData) => {
+    const newComment = commentData;
 
-    try {
-      const res = await fetch(fetchApi, { method: 'GET' });
+    // const newCommentStorage = [newComment, ...getLocalStorage];
+    setGetLocalStorage(newComment);
 
-      const rep = await res.text();
+    localStorage.setItem('list', JSON.stringify(newComment));
 
-      const data = JSON.parse(rep);
-      setIsLoading(false);
-      // console.log(data.content);
-    } catch (error) {
-      console.log(error);
-    }
+    // console.log(outputArrayFromGoogleData);
+    // console.log(getLocalStorage);
   };
 
   // CREATE COMMENT LIST
   const createListItem = (id, name, message, password, createdAt) => {
-    console.log(dataFromGoogle);
+    // console.log(dataFromGoogle);
     // Check if the item already exists
+
     const existingItem = getLocalStorage.find((item) => item.id === id);
 
     if (!existingItem) {
@@ -88,6 +83,38 @@ const Comment = () => {
       };
 
       setGetLocalStorage((prev) => [comment, ...prev]);
+    }
+  };
+
+  // FETCH DATA FROM GOOGLE SHEET.
+  const bringDataFromGoogleSheet = async () => {
+    setIsLoading(true);
+
+    try {
+      const res = await fetch(fetchApi, { method: 'GET' });
+
+      const rep = await res.text();
+
+      const data = JSON.parse(rep);
+      dataFromGoogle = data.content;
+      setIsLoading(false);
+
+      // console.log(dataFromGoogle);
+
+      outputArrayFromGoogleData = dataFromGoogle.map((innerArray) =>
+        outputArrayFromGoogle(innerArray)
+      );
+
+      addToLocalStorage(outputArrayFromGoogleData);
+      outputArrayFromGoogleData.map((item) => {
+        const { id, name, message, password, createdAt } = item;
+
+        createListItem(id, name, message, password, createdAt);
+      });
+
+      // console.log(outputArrayFromGoogleData);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -106,7 +133,7 @@ const Comment = () => {
     formData.append('CreatedAt', createdAt);
     formData.append('Id', id);
 
-    console.log(Object.fromEntries(formData));
+    // console.log(Object.fromEntries(formData));
 
     if (!name || !message || !password) {
       commentAlarm(
@@ -119,8 +146,6 @@ const Comment = () => {
     }
 
     if (name && message && password) {
-      createListItem(id, name, message, password, createdAt);
-      addToLocalStorage(id, name, message, password, createdAt);
       setIsLoading(true);
 
       try {
@@ -130,8 +155,10 @@ const Comment = () => {
         });
 
         const rep = await res.text();
-        console.log(rep);
+        // console.log(rep);
         setIsLoading(false);
+
+        bringDataFromGoogleSheet();
 
         commentAlarm(
           'Message ajouté à la liste.',
@@ -154,13 +181,7 @@ const Comment = () => {
 
   useEffect(() => {
     bringDataFromGoogleSheet();
-    if (getLocalStorage) {
-      getLocalStorage.map((comment) => {
-        const { id, name, message, password, createdAt } = comment;
-        createListItem(id, name, message, password, createdAt);
-      });
-    }
-  }, [getLocalStorage]);
+  }, [dataFromGoogle]);
 
   return (
     <CommentContext.Provider

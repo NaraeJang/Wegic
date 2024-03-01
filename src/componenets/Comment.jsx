@@ -56,18 +56,6 @@ const Comment = () => {
 
   // Fetch data from Google sheet.
   const bringDataFromGoogleSheet = async () => {
-    // await fetch(fetchApi, {
-    //   method: 'GET',
-    // })
-    //   .then((res) => res.text())
-    //   .then((rep) => {
-    //     let data = JSON.parse(rep);
-
-    //         dataFromGoogle =
-    //     return data.content;
-    //   })
-    //   .catch((err) => console.log(err));
-
     setIsLoading(true);
 
     try {
@@ -75,11 +63,9 @@ const Comment = () => {
 
       const rep = await res.text();
 
-      console.log(rep);
-
       const data = JSON.parse(rep);
       setIsLoading(false);
-      console.log(data.content);
+      // console.log(data.content);
     } catch (error) {
       console.log(error);
     }

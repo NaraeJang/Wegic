@@ -9,6 +9,7 @@ const RsvpContext = createContext();
 const Appointment = () => {
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
   const [isSecondModalOpen, setIsSecondModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <RsvpContext.Provider
@@ -17,6 +18,8 @@ const Appointment = () => {
         setIsFirstModalOpen,
         isSecondModalOpen,
         setIsSecondModalOpen,
+        isLoading,
+        setIsLoading,
       }}>
       {isFirstModalOpen && <RsvpFirstModal />}
       {isSecondModalOpen && <RsvpSecondModal />}

@@ -10,7 +10,8 @@ const rsvpApiURL = import.meta.env.VITE_RSVP_API_URL;
 
 const RsvpFirstModal = () => {
   const { isFrench, fetchApi } = useWegicContext();
-  const { setIsFirstModalOpen, setIsSecondModalOpen } = useRsvpContext();
+  const { setIsFirstModalOpen, setIsSecondModalOpen, isLoading, setIsLoading } =
+    useRsvpContext();
 
   const [alarmText, setAlarmText] = useState({
     textFR: '',
@@ -31,7 +32,7 @@ const RsvpFirstModal = () => {
     }, 3000);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -49,25 +50,31 @@ const RsvpFirstModal = () => {
       );
     }
 
-    fetch(fetchApi, {
-      method: 'POST',
-      body: formData,
-    })
-      .then((res) => res.text())
-      .then((data) => {
-        console.log(data);
-        commentDeleteAlarm(`Envoi des données..`, 'Sending data...', 'success');
-        setIsFirstModalOpen(false);
-        setIsSecondModalOpen(true);
-      })
-      .catch((err) => {
-        commentDeleteAlarm(
-          `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
-          'Something went wrong, please try it later.',
-          'danger'
-        );
-        return console.log(err);
+    setIsLoading(true);
+
+    try {
+      const res = await fetch(fetchApi, {
+        method: 'POST',
+        body: formData,
       });
+
+      const data = await res.text();
+
+      // console.log(data);
+      commentDeleteAlarm(`Envoi des données..`, 'Sending data...', 'success');
+      setIsFirstModalOpen(false);
+      setIsSecondModalOpen(true);
+      setIsLoading(false);
+
+      return data;
+    } catch (error) {
+      commentDeleteAlarm(
+        `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
+        'Something went wrong, please try it later.',
+        'danger'
+      );
+      return console.log(err);
+    }
   };
 
   return (
@@ -136,8 +143,15 @@ const RsvpFirstModal = () => {
             <button
               id="attendance-btn"
               className="btn btn-primary btn-block"
-              type="submit">
-              {isFrench ? 'soumettre' : 'submit'}
+              type="submit"
+              disabled={isLoading}>
+              {isLoading
+                ? isFrench
+                  ? 'soumettant...'
+                  : 'Submitting...'
+                : isFrench
+                ? 'soumettre'
+                : 'submit'}
             </button>
             {isAlarming && (
               <Alert alarmText={alarmText} isAlarming={isAlarming} />

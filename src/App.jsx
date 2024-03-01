@@ -27,7 +27,7 @@ function App() {
   const [isOurStoryModalOpen, setIsOurStoryModalOpen] = useState(false);
 
   const fetchApi =
-    'https://script.google.com/macros/s/AKfycbzIH2rpMX0RVUwLdycqQQd3_Fd9xMG_hlppWfbxTNkaOX84Xx3v9xr6pX1VPqkom7s3yQ/exec';
+    'https://script.google.com/macros/s/AKfycby2MdF6b-9PdgMicTymonkPL-BASbltcLrpnoomVc-ZQGmqkhM8JULKwx6uBe-vaxsYsg/exec';
 
   const toggleFrench = () => {
     setIsFrench(!isFrench);

@@ -17,6 +17,7 @@ const Comment = () => {
     textEN: '',
     alertStatus: '',
   });
+  const [isLoading, setIsLoading] = useState(false);
   const [isAlarming, setIsAlarming] = useState(true);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState({});
@@ -24,6 +25,7 @@ const Comment = () => {
   const [getLocalStorage, setGetLocalStorage] = useState(
     localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
   );
+  let dataFromGoogle;
 
   // Display Alert
   function commentAlarm(textFR, textEN, alertStatus) {
@@ -52,8 +54,40 @@ const Comment = () => {
     localStorage.setItem('list', JSON.stringify(newCommentStorage));
   };
 
+  // Fetch data from Google sheet.
+  const bringDataFromGoogleSheet = async () => {
+    // await fetch(fetchApi, {
+    //   method: 'GET',
+    // })
+    //   .then((res) => res.text())
+    //   .then((rep) => {
+    //     let data = JSON.parse(rep);
+
+    //         dataFromGoogle =
+    //     return data.content;
+    //   })
+    //   .catch((err) => console.log(err));
+
+    setIsLoading(true);
+
+    try {
+      const res = await fetch(fetchApi, { method: 'GET' });
+
+      const rep = await res.text();
+
+      console.log(rep);
+
+      const data = JSON.parse(rep);
+      setIsLoading(false);
+      console.log(data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // CREATE COMMENT LIST
   const createListItem = (id, name, message, password, createdAt) => {
+    console.log(dataFromGoogle);
     // Check if the item already exists
     const existingItem = getLocalStorage.find((item) => item.id === id);
 
@@ -72,7 +106,7 @@ const Comment = () => {
   };
 
   // HANDLE SUBMIT
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -84,6 +118,7 @@ const Comment = () => {
     const createdAt = dayjs().format('DD/MM/YYYY');
 
     formData.append('CreatedAt', createdAt);
+    formData.append('Id', id);
 
     console.log(Object.fromEntries(formData));
 
@@ -100,28 +135,31 @@ const Comment = () => {
     if (name && message && password) {
       createListItem(id, name, message, password, createdAt);
       addToLocalStorage(id, name, message, password, createdAt);
+      setIsLoading(true);
 
-      fetch(fetchApi, {
-        method: 'POST',
-        body: formData,
-      })
-        .then((res) => res.text())
-        .then((data) => {
-          console.log(data);
-          commentAlarm(
-            'Message ajouté à la liste.',
-            'Message added to the list',
-            'success'
-          );
-        })
-        .catch((err) => {
-          commentAlarm(
-            `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
-            'Something went wrong, please try it later.',
-            'danger'
-          );
-          return console.log(err);
+      try {
+        const res = await fetch(fetchApi, {
+          method: 'POST',
+          body: formData,
         });
+
+        const rep = await res.text();
+        console.log(rep);
+        setIsLoading(false);
+
+        commentAlarm(
+          'Message ajouté à la liste.',
+          'Message added to the list',
+          'success'
+        );
+      } catch (error) {
+        commentAlarm(
+          `Quelque chose s'est mal passé, veuillez réessayer plus tard.`,
+          'Something went wrong, please try it later.',
+          'danger'
+        );
+        console.log(error);
+      }
 
       e.target.reset();
       return;
@@ -129,6 +167,7 @@ const Comment = () => {
   };
 
   useEffect(() => {
+    bringDataFromGoogleSheet();
     if (getLocalStorage) {
       getLocalStorage.map((comment) => {
         const { id, name, message, password, createdAt } = comment;
@@ -146,6 +185,8 @@ const Comment = () => {
         setGetLocalStorage,
         deleteItem,
         setDeleteItem,
+        isLoading,
+        setIsLoading,
       }}>
       <ModalCommentDelete />
       <section className="comment">
@@ -192,8 +233,15 @@ const Comment = () => {
             <button
               className="btn btn-primary btn-block"
               type="submit"
-              id="comment-submit-btn">
-              {isFrench ? 'Laisser un Message' : 'Leave A Message'}
+              id="comment-submit-btn"
+              disabled={isLoading}>
+              {isLoading
+                ? isFrench
+                  ? 'soumettant...'
+                  : 'Submitting...'
+                : isFrench
+                ? 'Laisser un Message'
+                : 'Leave A Message'}
             </button>
             {isAlarming && (
               <Alert alarmText={alarmText} isAlarming={isAlarming} />

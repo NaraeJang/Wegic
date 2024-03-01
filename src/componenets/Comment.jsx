@@ -91,29 +91,41 @@ const Comment = () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch(fetchApi, { method: 'GET' });
+      const res = await fetch(fetchApi, { method: 'GET', mode: 'no-cors' });
 
       const rep = await res.text();
 
-      const data = JSON.parse(rep);
-      dataFromGoogle = data.content;
+      console.log('Response from server:', rep);
       setIsLoading(false);
 
-      // console.log(dataFromGoogle);
+      if (rep.trim() !== '') {
+        const data = JSON.parse(rep);
+        dataFromGoogle = data.content;
 
-      outputArrayFromGoogleData = dataFromGoogle.map((innerArray) =>
-        outputArrayFromGoogle(innerArray)
-      );
+        // console.log(dataFromGoogle);
 
-      addToLocalStorage(outputArrayFromGoogleData);
-      outputArrayFromGoogleData.map((item) => {
-        const { id, name, message, password, createdAt } = item;
+        outputArrayFromGoogleData = dataFromGoogle.map((innerArray) =>
+          outputArrayFromGoogle(innerArray)
+        );
 
-        createListItem(id, name, message, password, createdAt);
-      });
+        addToLocalStorage(outputArrayFromGoogleData);
 
-      // console.log(outputArrayFromGoogleData);
+        outputArrayFromGoogleData.map((item) => {
+          const { id, name, message, password, createdAt } = item;
+          const existingItem = getLocalStorage.find((item) => item.id === id);
+
+          console.log(existingItem);
+          if (!existingItem) {
+            createListItem(id, name, message, password, createdAt);
+          }
+        });
+
+        // console.log(outputArrayFromGoogleData);
+      } else {
+        console.error('Empty response from the server.');
+      }
     } catch (error) {
+      setIsLoading(false);
       console.log(error);
     }
   };
@@ -181,7 +193,7 @@ const Comment = () => {
 
   useEffect(() => {
     bringDataFromGoogleSheet();
-  }, [dataFromGoogle]);
+  }, [getLocalStorage]);
 
   return (
     <CommentContext.Provider

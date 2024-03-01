@@ -721,6 +721,7 @@ footer p {
   font-weight: 700;
   text-transform: uppercase;
   font-size: 1rem;
+  text-align: left;
 }
 .comment__header .close-icon {
   transform: translateX(8px);

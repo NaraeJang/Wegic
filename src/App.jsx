@@ -26,14 +26,7 @@ function App() {
   const [isFrench, setIsFrench] = useState(false);
   const [isOurStoryModalOpen, setIsOurStoryModalOpen] = useState(false);
 
-  const sheetId = '1RGxbfj-jWJiserExFNDRPaBr1LwrwEo7QB97R-uashg';
-  const base = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?`;
-  const sheetName = 'Comment';
-  const query = encodeURIComponent('Select *');
-  const url = `${base}&sheet=${sheetName}&tq=${query}`;
-
-  const fetchApi =
-    'https://script.google.com/macros/s/AKfycbwr59kQ1zli_mL6517kGTTRzJPwB64s-OZEY5lx2MIoCGidbSyfvMmtFFqi_X-gsHQ1/exec';
+  const fetchApi = `https://script.google.com/macros/s/AKfycbxPf0hGXHbp471rAULle5Dd6-vGTdyT1rpXQPywhK0Axnpcr5Hvz8YVTKojN_Wv3TlT/exec`;
 
   const toggleFrench = () => {
     setIsFrench(!isFrench);
@@ -85,7 +78,6 @@ function App() {
         setIsOurStoryModalOpen,
         isOurStoryModalOpen,
         fetchApi,
-        url,
       }}>
       <Header />
       <OurStory />

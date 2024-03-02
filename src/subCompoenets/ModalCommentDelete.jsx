@@ -7,7 +7,7 @@ import ModalTitle from './ModalTitle';
 import xtype from 'xtypejs';
 
 const ModalCommentDelete = () => {
-  const { isFrench } = useWegicContext();
+  const { isFrench, fetchApi } = useWegicContext();
   const {
     isDeleteModalOpen,
     setIsDeleteModalOpen,
@@ -15,6 +15,7 @@ const ModalCommentDelete = () => {
     setGetLocalStorage,
     deleteItem,
     setDeleteItem,
+    bringDataFromGoogleSheet,
   } = useCommentContext();
 
   const [alarmText, setAlarmText] = useState({
@@ -42,7 +43,7 @@ const ModalCommentDelete = () => {
     localStorage.setItem('list', JSON.stringify(items));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -56,14 +57,29 @@ const ModalCommentDelete = () => {
       );
     }
 
-    if (confirmedPassword !== deleteItem?.password) {
+    if (confirmedPassword !== deleteItem?.password.toString()) {
       return commentDeleteAlarm(
         `Mot de passe incorrect.`,
         'Incorrect password.',
         'danger'
       );
     }
-    removeFromLocalStorage(deleteItem.id);
+
+    try {
+      const res = await fetch(fetchApi, {
+        method: 'Post',
+        body: { id: deleteItem.id, option: 'DELETE' },
+      });
+
+      const rep = await res.text();
+
+      console.log(rep);
+      bringDataFromGoogleSheet();
+      // removeFromLocalStorage(deleteItem.id);
+    } catch (error) {
+      console.log(error);
+    }
+
     setIsDeleteModalOpen(false);
     e.target.reset();
   };

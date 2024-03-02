@@ -117,16 +117,16 @@ const Comment = () => {
 
     const name = formData.get('CommentName');
     const message = formData.get('CommentMessage');
-    const password = formData.get('CommentPassword');
+
     const id = nanoid();
     const createdAt = dayjs().format('DD/MM/YYYY');
 
     formData.append('CreatedAt', createdAt);
     formData.append('Id', id);
 
-    // console.log(Object.fromEntries(formData));
+    console.log(Object.fromEntries(formData));
 
-    if (!name || !message || !password) {
+    if (!name || !message) {
       commentAlarm(
         'Veuillez fournir des valeurs appropriées.',
         'Please provide proper values.',
@@ -136,7 +136,7 @@ const Comment = () => {
       return;
     }
 
-    if (name && message && password) {
+    if (name && message) {
       setIsLoading(true);
 
       try {
@@ -185,6 +185,7 @@ const Comment = () => {
         setDeleteItem,
         isLoading,
         setIsLoading,
+        bringDataFromGoogleSheet,
       }}>
       <ModalCommentDelete />
       <section className="comment">
@@ -220,13 +221,13 @@ const Comment = () => {
                 }></textarea>
             </div>
 
-            <div className="comment-input-password">
+            {/* <div className="comment-input-password">
               <label htmlFor="password">
                 {isFrench ? 'Mot de Passe' : 'Password'}
                 <span className="obligatory">*</span>
               </label>
               <input type="password" name="CommentPassword" id="password" />
-            </div>
+            </div> */}
 
             <button
               className="btn btn-primary btn-block"

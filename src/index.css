@@ -686,6 +686,7 @@ footer p {
   background: transparent;
   padding-left: 0.25rem;
   padding-bottom: 0.25rem;
+  font-size: 1rem;
 }
 #comment-form textarea {
   width: 100%;
@@ -694,6 +695,7 @@ footer p {
   padding: 0.5rem;
   background: transparent;
   border-radius: 0.5rem;
+  font-size: 1rem;
 }
 #comment-form textarea::placeholder {
   color: #c0b9a0;
@@ -712,6 +714,7 @@ footer p {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
 }
 .comment__header__main--date {
   font-size: 0.75rem;

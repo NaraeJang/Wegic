@@ -79,6 +79,7 @@
     background: transparent;
     padding-left: 0.25rem;
     padding-bottom: 0.25rem;
+    font-size: $regular-text;
   }
 
   textarea {
@@ -88,6 +89,7 @@
     padding: 0.5rem;
     background: transparent;
     border-radius: 0.5rem;
+    font-size: $regular-text;
 
     &::placeholder {
       color: lighten($cc-primary-400, 20%);

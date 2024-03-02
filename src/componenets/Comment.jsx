@@ -21,7 +21,7 @@ const Comment = () => {
   const [isAlarming, setIsAlarming] = useState(true);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState({});
-  const { isFrench, fetchApi } = useWegicContext();
+  const { isFrench, fetchApi, url } = useWegicContext();
   const [getLocalStorage, setGetLocalStorage] = useState(
     localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
   );
@@ -44,8 +44,8 @@ const Comment = () => {
     const newItem = {
       id: innerArray[0],
       name: innerArray[1],
-      message: innerArray[2].toString(),
-      password: innerArray[3].toString(),
+      message: innerArray[2],
+      password: innerArray[3],
       createdAt: innerArray[4],
     };
 
@@ -54,19 +54,16 @@ const Comment = () => {
 
   // ADD LOCAL STORAGE
   const addToLocalStorage = (commentData) => {
-    const newComment = commentData;
+    const newComment = commentData.reverse();
 
     // const newCommentStorage = [newComment, ...getLocalStorage];
     setGetLocalStorage(newComment);
 
     localStorage.setItem('list', JSON.stringify(newComment));
-
-    // console.log(outputArrayFromGoogleData);
-    // console.log(getLocalStorage);
   };
 
   // CREATE COMMENT LIST
-  const createListItem = (id, name, message, password, createdAt) => {
+  const createListItem = ({ id, name, message, password, createdAt }) => {
     // console.log(dataFromGoogle);
     // Check if the item already exists
 
@@ -91,39 +88,21 @@ const Comment = () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch(fetchApi, { method: 'GET', mode: 'no-cors' });
+      const res = await fetch(fetchApi, { method: 'GET' });
 
       const rep = await res.text();
 
-      console.log('Response from server:', rep);
+      const data = JSON.parse(rep);
+      // console.log(data);
+
+      dataFromGoogle = data.content;
       setIsLoading(false);
 
-      if (rep.trim() !== '') {
-        const data = JSON.parse(rep);
-        dataFromGoogle = data.content;
+      outputArrayFromGoogleData = dataFromGoogle.map((innerArray) =>
+        outputArrayFromGoogle(innerArray)
+      );
 
-        // console.log(dataFromGoogle);
-
-        outputArrayFromGoogleData = dataFromGoogle.map((innerArray) =>
-          outputArrayFromGoogle(innerArray)
-        );
-
-        addToLocalStorage(outputArrayFromGoogleData);
-
-        outputArrayFromGoogleData.map((item) => {
-          const { id, name, message, password, createdAt } = item;
-          const existingItem = getLocalStorage.find((item) => item.id === id);
-
-          console.log(existingItem);
-          if (!existingItem) {
-            createListItem(id, name, message, password, createdAt);
-          }
-        });
-
-        // console.log(outputArrayFromGoogleData);
-      } else {
-        console.error('Empty response from the server.');
-      }
+      addToLocalStorage(outputArrayFromGoogleData);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
@@ -193,7 +172,7 @@ const Comment = () => {
 
   useEffect(() => {
     bringDataFromGoogleSheet();
-  }, [getLocalStorage]);
+  }, []);
 
   return (
     <CommentContext.Provider

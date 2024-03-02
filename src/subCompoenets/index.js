@@ -10,3 +10,4 @@ export { default as Alert } from './Alert';
 export { default as RsvpFirstModal } from './RsvpFirstModal';
 export { default as RsvpSecondModal } from './RsvpSecondModal';
 export { default as RsvpRadioInput } from './RsvpRadioInput';
+export { default as CommentPagination } from './CommentPagination';

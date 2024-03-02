@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import {
   ModalCommentDelete,
   CommentListItem,
+  CommentPagination,
   TitleNoDivider,
   Alert,
 } from '../subCompoenets';
@@ -221,14 +222,6 @@ const Comment = () => {
                 }></textarea>
             </div>
 
-            {/* <div className="comment-input-password">
-              <label htmlFor="password">
-                {isFrench ? 'Mot de Passe' : 'Password'}
-                <span className="obligatory">*</span>
-              </label>
-              <input type="password" name="CommentPassword" id="password" />
-            </div> */}
-
             <button
               className="btn btn-primary btn-block"
               type="submit"
@@ -260,6 +253,8 @@ const Comment = () => {
             })}
           </div>
         </div>
+
+        <CommentPagination />
       </section>
     </CommentContext.Provider>
   );

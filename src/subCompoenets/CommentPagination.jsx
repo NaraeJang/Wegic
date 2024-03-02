@@ -7,12 +7,6 @@ const CommentPagination = () => {
   // Calculate the total number of pages
   const numOfPages = Math.ceil(getLocalStorage.length / itemsPerPage);
 
-  // Generate an array of page numbers
-  const pageNumbers = Array.from(
-    { length: numOfPages },
-    (_, index) => index + 1
-  );
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };

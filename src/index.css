@@ -900,6 +900,52 @@ footer p {
     max-width: 360px; /* Adjust this value to your preference */
   }
 }
+.btn-prev,
+.btn-next,
+.btn-page {
+  border: none;
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #7b7047;
+  border-radius: 2rem;
+  transition: 0.3s ease-in-out all;
+}
+.btn-prev:hover:not(.dots),
+.btn-next:hover:not(.dots),
+.btn-page:hover:not(.dots) {
+  background-color: #c08766;
+  color: #f3f3f3;
+}
+.btn-prev:not(.dots),
+.btn-next:not(.dots),
+.btn-page:not(.dots) {
+  cursor: pointer;
+}
+
+.active {
+  color: #c08766;
+  background-color: #f1e4d9;
+  font-weight: 700;
+}
+
+.pagination,
+.page-btn-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .btn, .btn:visited, .btn:link {
   display: inline-block;
   width: 73%;

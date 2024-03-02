@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 const CommentContext = createContext();
 
 const Comment = () => {
+  const { isFrench, fetchApi } = useWegicContext();
   const [alarmText, setAlarmText] = useState({
     textFR: '',
     textEN: '',
@@ -20,14 +21,22 @@ const Comment = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isAlarming, setIsAlarming] = useState(true);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [deleteItem, setDeleteItem] = useState({});
-  const { isFrench, fetchApi, url } = useWegicContext();
   const [getLocalStorage, setGetLocalStorage] = useState(
     localStorage.getItem('list') ? JSON.parse(localStorage.getItem('list')) : []
   );
   let dataFromGoogle;
   let outputArrayFromGoogleData = [];
+
+  // SET PAGINATION
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Calculate the start and end indices for the current page
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  // Get the comments to display on the current page
+  const displayedComments = getLocalStorage.slice(startIndex, endIndex);
 
   // DISPLAY ALARM
   function commentAlarm(textFR, textEN, alertStatus) {
@@ -178,15 +187,15 @@ const Comment = () => {
   return (
     <CommentContext.Provider
       value={{
-        isDeleteModalOpen,
-        setIsDeleteModalOpen,
         getLocalStorage,
         setGetLocalStorage,
-        deleteItem,
-        setDeleteItem,
         isLoading,
         setIsLoading,
         bringDataFromGoogleSheet,
+        displayedComments,
+        itemsPerPage,
+        currentPage,
+        setCurrentPage,
       }}>
       <ModalCommentDelete />
       <section className="comment">
@@ -241,18 +250,20 @@ const Comment = () => {
           </form>
         </div>
 
-        <div className="container">
-          <div className="comment__list">
-            {getLocalStorage.map((comment, index) => {
-              return (
-                <CommentListItem
-                  key={`${index}commentList`}
-                  comment={comment}
-                />
-              );
-            })}
+        {displayedComments.length > 1 && (
+          <div className="container">
+            <div className="comment__list">
+              {displayedComments.map((comment, index) => {
+                return (
+                  <CommentListItem
+                    key={`${index}commentList`}
+                    comment={comment}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
+        )}
 
         <CommentPagination />
       </section>

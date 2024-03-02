@@ -1,0 +1,43 @@
+.btn-prev,
+.btn-next,
+.btn-page {
+  border: none;
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: $small-text;
+  font-weight: $font-weight-regular;
+  color: $cc-primary-500;
+  border-radius: 2rem;
+  transition: $transition;
+
+  &:hover:not(.dots) {
+    background-color: $cc-secondary-500;
+    color: $cc-white;
+  }
+
+  &:not(.dots) {
+    cursor: pointer;
+  }
+}
+
+.active {
+  color: $cc-secondary-500;
+  background-color: $cc-secondary-100;
+  font-weight: $font-weight-bold;
+}
+
+.pagination,
+.page-btn-container {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

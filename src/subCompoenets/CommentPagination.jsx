@@ -1,16 +1,20 @@
-const CommentPagination = () => {
-  const {
-    data: { currentPage, numOfPages },
-  } = useAllJobsContext();
-  const { search, pathname } = useLocation();
-  const navigate = useNavigate();
+import { useCommentContext } from '../componenets/Comment';
 
-  const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
+const CommentPagination = () => {
+  const { getLocalStorage, itemsPerPage, currentPage, setCurrentPage } =
+    useCommentContext();
+
+  // Calculate the total number of pages
+  const numOfPages = Math.ceil(getLocalStorage.length / itemsPerPage);
+
+  // Generate an array of page numbers
+  const pageNumbers = Array.from(
+    { length: numOfPages },
+    (_, index) => index + 1
+  );
 
   const handlePageChange = (pageNumber) => {
-    const searchParams = new URLSearchParams(search);
-    searchParams.set('page', pageNumber);
-    navigate(`${pathname}?${searchParams.toString()}`);
+    setCurrentPage(pageNumber);
   };
 
   const addPageButton = ({ pageNumber, activeClass }) => {
@@ -18,7 +22,7 @@ const CommentPagination = () => {
       <button
         type="button"
         key={pageNumber}
-        className={`btn btn-page ${activeClass && 'active'}`}
+        className={` btn-page ${activeClass && 'active'}`}
         onClick={() => handlePageChange(pageNumber)}>
         {pageNumber}
       </button>
@@ -27,11 +31,17 @@ const CommentPagination = () => {
 
   const renderPageButtons = () => {
     const pageButtons = [];
-    // first page
+
+    // Render the first page button
     pageButtons.push(
-      addPageButton({ pageNumber: 1, activeClass: currentPage === 1 })
+      addPageButton({
+        pageNumber: 1,
+        activeClass: currentPage === 1,
+        key: 'page-1',
+      })
     );
 
+    // Render dots if currentPage is greater than 3
     if (currentPage > 3) {
       pageButtons.push(
         <span className="btn-page dots" key="dots-1">
@@ -39,35 +49,23 @@ const CommentPagination = () => {
         </span>
       );
     }
-    // one before current page
-    if (currentPage !== 1 && currentPage !== 2) {
+
+    // Render buttons for the range (currentPage - 1) to (currentPage + 1)
+    for (
+      let i = Math.max(2, currentPage - 1);
+      i <= Math.min(numOfPages - 1, currentPage + 1);
+      i++
+    ) {
       pageButtons.push(
         addPageButton({
-          pageNumber: currentPage - 1,
-          activeClass: false,
+          pageNumber: i,
+          activeClass: i === currentPage,
+          key: `page-${i}`,
         })
       );
     }
 
-    // current page
-    if (currentPage !== 1 && currentPage !== numOfPages) {
-      pageButtons.push(
-        addPageButton({
-          pageNumber: currentPage,
-          activeClass: true,
-        })
-      );
-    }
-
-    // one after current page
-    if (currentPage !== numOfPages && currentPage !== numOfPages - 1) {
-      pageButtons.push(
-        addPageButton({
-          pageNumber: currentPage + 1,
-          activeClass: false,
-        })
-      );
-    }
+    // Render dots if currentPage is less than (numOfPages - 2)
     if (currentPage < numOfPages - 2) {
       pageButtons.push(
         <span className="btn-page dots" key="dots+1">
@@ -76,39 +74,42 @@ const CommentPagination = () => {
       );
     }
 
-    // last page
-    pageButtons.push(
-      addPageButton({
-        pageNumber: numOfPages,
-        activeClass: currentPage === numOfPages,
-      })
-    );
+    // Render the last page button
+    if (numOfPages > 1) {
+      pageButtons.push(
+        addPageButton({
+          pageNumber: numOfPages,
+          activeClass: currentPage === numOfPages,
+          key: `page-${numOfPages}`,
+        })
+      );
+    }
 
     return pageButtons;
   };
 
   return (
-    <div className="container">
+    <div className="container pagination">
       <button
         type="button"
-        className="btn btn-prev"
+        className=" btn-prev"
         onClick={() => {
           let prevPage = currentPage - 1;
           if (prevPage < 1) prevPage = numOfPages;
           handlePageChange(prevPage);
         }}>
-        <i class="fa-solid fa-chevron-left"></i>
+        <i className="fa-solid fa-chevron-left"></i>
       </button>
       <div className="page-btn-container">{renderPageButtons()}</div>
       <button
         type="button"
-        className="btn btn-next"
+        className="btn-next"
         onClick={() => {
           let nextPage = currentPage + 1;
           if (nextPage > numOfPages) nextPage = 1;
           handlePageChange(nextPage);
         }}>
-        <i class="fa-solid fa-chevron-right"></i>
+        <i className="fa-solid fa-chevron-right"></i>
       </button>
     </div>
   );

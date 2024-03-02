@@ -30,11 +30,11 @@ npm start
 
 ## Dependencies
 
-| Name    | Version | Name        | Version |
-| :------ | :------ | :---------- | :------ |
-| Vite.js | 5.0.8   | Sass        | 1.71.1  |
-| Dayjs   | 1.11.7  | React-icons | 4.12.0  |
-| Swiper  | 11.0.6  |
+| Name    | Version | Name         | Version |
+| :------ | :------ | :----------- | :------ |
+| Vite.js | 5.0.8   | Sass         | 1.71.1  |
+| Dayjs   | 1.11.7  | React-icons  | 4.12.0  |
+| Swiper  | 11.0.6  | Font Awesome | script  |
 
 ## Process
 

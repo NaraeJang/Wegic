@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import { useWegicContext } from '../App';
 import dividerLeft from '../assets/images/divider/divider-left.png';
 import dividerRight from '../assets/images/divider/divider-right.png';
-import { Button, RsvpFirstModal, RsvpSecondModal } from '../subCompoenets';
+import { Button, RsvpFirstModal, RsvpSecondModal } from '../subComponents';
 
 const RsvpContext = createContext();
 

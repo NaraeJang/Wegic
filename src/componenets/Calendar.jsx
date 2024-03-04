@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useWegicContext } from '../App';
-import { TitleNoDivider } from '../subCompoenets';
+import { TitleNoDivider } from '../subComponents';
 import dayjs from 'dayjs';
 import calendar from 'dayjs/plugin/calendar';
 

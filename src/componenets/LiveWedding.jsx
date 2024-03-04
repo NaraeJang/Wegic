@@ -1,5 +1,5 @@
 import { useWegicContext } from '../App';
-import { TitleNoDivider } from '../subCompoenets';
+import { TitleNoDivider } from '../subComponents';
 
 const LiveWedding = () => {
   const { isFrench, dDay } = useWegicContext();

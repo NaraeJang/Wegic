@@ -5,7 +5,7 @@ import {
   CommentPagination,
   TitleNoDivider,
   Alert,
-} from '../subCompoenets';
+} from '../subComponents';
 import { useWegicContext } from '../App';
 import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';

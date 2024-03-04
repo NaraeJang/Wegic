@@ -1,4 +1,4 @@
-import { TitleNoDivider } from '../subCompoenets';
+import { TitleNoDivider } from '../subComponents';
 import { weddingPartyImage } from '../context/weddingPartyImages';
 import { useWegicContext } from '../App';
 

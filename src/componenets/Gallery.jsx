@@ -1,4 +1,4 @@
-import { GalleryImages, TitleNoDivider } from '../subCompoenets';
+import { GalleryImages, TitleNoDivider } from '../subComponents';
 
 const Gallery = () => {
   return (

@@ -1,4 +1,4 @@
-import { Button, PopupOurStory, Title } from '../subCompoenets';
+import { Button, PopupOurStory, Title } from '../subComponents';
 import { useWegicContext } from '../App';
 
 const OurStory = () => {

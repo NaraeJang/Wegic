@@ -20,11 +20,11 @@ Welcome to Wegic - Your Mobile Wedding Invitation Solution. Originally conceived
 
 #### Google Sheet DB
 
-[Access the Google Sheet](https://docs.google.com/spreadsheets/d/1X-2b6CSyaXiua-gUG3LLZ7QMXjY9hegZcDf2g0FdyPg/edit?usp=sharing)
+[Access the Google Sheet](https://docs.google.com/spreadsheets/d/1X-2b6CSyaXiua-gUG3LLZ7QMXjY9hegZcDf2g0FdyPg/edit?usp=sharing){:target="\_blank" rel="noopener"}
 
 #### Live Demo
 
-[Experience the Live Demo](https://naraejang-wegic-project.netlify.app/)
+[Experience the Live Demo](https://naraejang-wegic-project.netlify.app/){:target="\_blank" rel="noopener"}
 
 ## Installation
 

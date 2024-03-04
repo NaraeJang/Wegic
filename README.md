@@ -1,6 +1,6 @@
 # Wegic
 
-Welcome to Wegic - Your Mobile Wedding Invitation Solution. Originally conceived as a UX/UI project for a Korean-Canadian couple entering the Canadian wedding market, I've brought the Wegic Mobile Wedding Invitation to life through web development. Mobile invitations have gained popularity for their convenience, cost-effectiveness, environmental consciousness, technological integration, customization options, and social media compatibility. Focused on the mobile version, Wegic is fully responsive across various mobile devices, offering notable features such as a dynamic calendar, D-day countdown, and the ability to save data and leave comments for the couple using Google Sheets.
+Welcome to Wegic - Your Mobile Wedding Invitation Solution. Originally conceived as a UX/UI project for a Korean-Canadian couple entering the Canadian wedding market, I've brought the Wegic Mobile Wedding Invitation to life through web development. Mobile invitations have gained popularity for their convenience, cost-effectiveness, environmental consciousness and social media compatibility. Focused on the mobile version, Wegic is fully responsive across various mobile devices, offering notable features such as a dynamic calendar, D-day countdown, and the ability to save data and leave comments for the couple.
 
 #### Features
 
@@ -57,7 +57,7 @@ npm start
 
 ### Project background
 
-Originally, It was a UX/UI project for a Korean-Canadian couple entering the Canadian wedding market, and I decided to bring the Wegic Mobile Wedding Invitation to life through web development.
+Originally conceived as one of my UX/UI projects for a Korean-Canadian couple entering the Canadian wedding market, and I decided to bring the Wegic Mobile Wedding Invitation to life through web development.
 
 ### Role as UI/UX Designer
 
@@ -65,7 +65,7 @@ As a UI/UX Designer, I collaborated closely with my clients to gather user requi
 
 ### Role as Front-end Developer
 
-As a Front-end Developer, I planned the division of each section to build the application, created components based on different sections in the page, and started editing the SCSS. After finalizing the visual part, I focused on implementing functionalities. Constant testing was performed to reduce errors.
+As a Front-end Developer, I planned the division of each section to build the application, created components based on different sections in the page, and started editing the SCSS. After finalizing the visuals, I focused on implementing the functionalities, and constant testing was performed to reduce errors.
 
 ### Learnings
 
@@ -75,7 +75,7 @@ The project required thinking about structures, connections among functions, pag
 
 #### Google App Script
 
-Understanding how Google App Script works took time, but it proved interesting to use Google Sheets as a Database for the app.
+Understanding how Google App Script works took time, but it proved to be interesting to use Google Sheets as a Database for the app.
 
 #### Deep Dive into Functions
 

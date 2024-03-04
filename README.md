@@ -4,11 +4,15 @@ Introducing WEGIC Mobile Wedding Invitation, a delightful UI/UX project I worked
 
 As a UI/UX Designer, I collaborated closely with my clients to gather user requirements, analyze competitors' offerings, and develop the mobile invitation structure. I created and refined paper wireframes, which then served as the basis for digital wireframes. Designing high-fidelity UI prototypes, I ensured seamless user flows through user testing.
 
-During a two-week coding challenge, I brought the WEGIC Mobile Wedding Invitation to life. The resulting design is fully responsive across various mobile devices. Notable features include a dynamic calendar, D-day countdown, and the ability to save data and leave comments for the couple using local storage.
+During a coding challenge, I brought the WEGIC Mobile Wedding Invitation to life. The resulting design is fully responsive across various mobile devices. Notable features include a dynamic calendar, D-day countdown, and the ability to save data and leave comments for the couple using local storage.
 
 #### Features
 
-## How to Use and Run the Project
+#### Live Demo
+
+[Go to Live Demo](https://naraejang-wegic-project.netlify.app/)
+
+## How to Use the Project
 
 ## Installation
 
@@ -35,6 +39,7 @@ npm start
 | Vite.js | 5.0.8   | Sass         | 1.71.1  |
 | Dayjs   | 1.11.7  | React-icons  | 4.12.0  |
 | Swiper  | 11.0.6  | Font Awesome | script  |
+| nanoid  | 5.0.6   | xtypejs      | 0.7.1   |
 
 ## Process
 

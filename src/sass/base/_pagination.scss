@@ -19,12 +19,12 @@
   &:not(.dots) {
     cursor: pointer;
   }
-}
 
-.active {
-  color: $cc-secondary-500;
-  background-color: $cc-secondary-100;
-  font-weight: $font-weight-bold;
+  .active {
+    color: $cc-secondary-500;
+    background-color: $cc-secondary-100;
+    font-weight: $font-weight-bold;
+  }
 }
 
 .pagination,

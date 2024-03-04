@@ -113,6 +113,7 @@ const Comment = () => {
       );
 
       addToLocalStorage(outputArrayFromGoogleData);
+      setCurrentPage(1);
     } catch (error) {
       setIsLoading(false);
       console.log(error);
@@ -262,10 +263,9 @@ const Comment = () => {
                 );
               })}
             </div>
+            <CommentPagination />
           </div>
         )}
-
-        <CommentPagination />
       </section>
     </CommentContext.Provider>
   );

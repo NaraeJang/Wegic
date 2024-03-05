@@ -85,14 +85,6 @@ Creating the dynamic calendar involved developing several functions, managing st
 
 Each aspect of this project contributed to improving my skills, problem-solving abilities, and overall understanding of app development.
 
-## How Can It Be Improved?
-
-## Introduction Video
-
-Preparing...
-
-<!-- [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VI...)](https://www.youtube.com/watch?v=YOUTU...) -->
-
 ## License
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)

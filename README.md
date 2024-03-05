@@ -24,7 +24,7 @@ Welcome to Wegic - Your Mobile Wedding Invitation Solution. Originally conceived
 
 #### Live Demo
 
-[Experience the Live Demo](https://naraejang-wegic-project.netlify.app/)
+[Experience the Live Demo](https://naraejang-wegic-project.netlify.app/){:target="\_blank"}
 
 ## Installation
 

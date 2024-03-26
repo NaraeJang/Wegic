@@ -39,7 +39,7 @@ const Appointment = () => {
             />
           </div>
           <Button
-            textEn="Tesll Us Your Attendance"
+            textEn="Tell Us Your Attendance"
             textFr="Dites nous votre présence"
             onClick={() => {
               setIsFirstModalOpen(true);
